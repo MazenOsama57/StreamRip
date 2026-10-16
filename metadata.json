@@ -1,0 +1,6 @@
+{
+  "name": "StreamRip",
+  "description": "Media downloader and extractor to download video in MP4 or audio in MP3 from web URLs powered by yt-dlp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
