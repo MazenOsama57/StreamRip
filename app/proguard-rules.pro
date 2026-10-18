@@ -12,10 +12,12 @@
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Preserve YoutubeDL and FFmpeg native bindings and reflection
+-keep class com.yausername.** { *; }
+-keep interface com.yausername.** { *; }
+-dontwarn com.yausername.**
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Preserve JNI methods
+-keepclasseswithmembernames class * {
+    native <methods>;
+}

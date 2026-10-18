@@ -2,7 +2,6 @@ package com.example
 
 import android.app.Application
 import android.util.Log
-import com.yausername.aria2c.Aria2c
 import com.yausername.ffmpeg.FFmpeg
 import com.yausername.youtubedl_android.YoutubeDL
 import com.yausername.youtubedl_android.YoutubeDLException
@@ -41,17 +40,12 @@ class StreamRipApp : Application() {
                 _initState.value = InitState.Progress("Initializing Python & yt-dlp core...", 1, 4)
                 YoutubeDL.getInstance().init(this@StreamRipApp)
 
-                // Step 2: Initialize FFmpeg & Aria2c
-                _initState.value = InitState.Progress("Loading FFmpeg & Aria2c converters...", 2, 4)
+                // Step 2: Initialize FFmpeg
+                _initState.value = InitState.Progress("Loading FFmpeg converter engine...", 2, 4)
                 try {
                     FFmpeg.getInstance().init(this@StreamRipApp)
                 } catch (e: Exception) {
                     Log.w("StreamRipApp", "FFmpeg init warning: ${e.message}")
-                }
-                try {
-                    Aria2c.getInstance().init(this@StreamRipApp)
-                } catch (e: Exception) {
-                    Log.w("StreamRipApp", "Aria2c init warning: ${e.message}")
                 }
 
                 val initialVersion = try {

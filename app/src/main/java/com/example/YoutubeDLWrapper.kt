@@ -29,7 +29,7 @@ object YoutubeDLWrapper {
         return YoutubeDL.getInstance().destroyProcessById(processId)
     }
 
-    fun updateYoutubeDL(context: Context): YoutubeDL.UpdateStatus {
+    fun updateYoutubeDL(context: Context): YoutubeDL.UpdateStatus? {
         return YoutubeDL.getInstance().updateYoutubeDL(context)
     }
 
