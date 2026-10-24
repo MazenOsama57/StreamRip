@@ -38,14 +38,13 @@ data class MainUiState(
     val status: DownloadStatus = DownloadStatus.Idle,
     val downloads: List<DownloadedFile> = emptyList(),
     val engineVersion: String? = null,
-    val engineInitState: StreamRipApp.InitState = StreamRipApp.InitState.Progress("Initializing engine...", 1, 4),
     val isUpdatingEngine: Boolean = false,
     val activeTab: AppTab = AppTab.DOWNLOAD,
     val userMessage: String? = null,
-    val isEngineReady: Boolean = false,
-    val isInitializingOrUpdating: Boolean = true,
+    val isEngineReady: Boolean = true,
     val hasActiveCookies: Boolean = false,
     val showCookieDialog: Boolean = false,
+    val showSettingsDialog: Boolean = false,
     val requiresVerification: Boolean = false
 )
 
@@ -56,7 +55,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var activeProcessId: String? = null
 
     private val _uiState = MutableStateFlow(
-        MainUiState(hasActiveCookies = repository.cookieRepo.hasCookies())
+        MainUiState(
+            hasActiveCookies = repository.cookieRepo.hasCookies(),
+            engineVersion = repository.getEngineVersion()
+        )
     )
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
@@ -64,24 +66,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             app.initState.collect { initState ->
                 when (initState) {
-                    is StreamRipApp.InitState.Progress -> {
-                        _uiState.update {
-                            it.copy(
-                                engineInitState = initState,
-                                isEngineReady = false,
-                                isInitializingOrUpdating = true
-                            )
-                        }
-                    }
                     is StreamRipApp.InitState.Ready -> {
                         val ver = repository.getEngineVersion() ?: initState.version
                         _uiState.update {
                             it.copy(
-                                engineInitState = initState,
                                 isEngineReady = true,
-                                isInitializingOrUpdating = false,
-                                engineVersion = ver,
-                                userMessage = "yt-dlp engine updated to latest version ($ver)"
+                                engineVersion = ver
                             )
                         }
                     }
@@ -89,21 +79,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         val ver = repository.getEngineVersion() ?: initState.version
                         _uiState.update {
                             it.copy(
-                                engineInitState = initState,
                                 isEngineReady = true,
-                                isInitializingOrUpdating = false,
-                                engineVersion = ver,
-                                userMessage = initState.message
+                                engineVersion = ver
                             )
                         }
+                    }
+                    is StreamRipApp.InitState.Progress -> {
+                        // Startup progress is handled smoothly in the background
                     }
                     is StreamRipApp.InitState.Error -> {
                         _uiState.update {
                             it.copy(
-                                engineInitState = initState,
-                                isEngineReady = false,
-                                isInitializingOrUpdating = false,
-                                userMessage = "Engine setup issue: ${initState.message}"
+                                isEngineReady = true,
+                                engineVersion = repository.getEngineVersion() ?: "Ready"
                             )
                         }
                     }
@@ -111,6 +99,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         refreshDownloads()
+    }
+
+    fun openSettingsDialog() {
+        _uiState.update { it.copy(showSettingsDialog = true) }
+    }
+
+    fun closeSettingsDialog() {
+        _uiState.update { it.copy(showSettingsDialog = false) }
     }
 
     fun openCookieDialog() {
@@ -128,7 +124,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 it.copy(
                     hasActiveCookies = true,
                     requiresVerification = false,
-                    userMessage = "YouTube cookies captured and saved successfully!"
+                    userMessage = "YouTube cookies saved successfully"
                 )
             }
         } else {
@@ -148,7 +144,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 it.copy(
                     hasActiveCookies = true,
                     requiresVerification = false,
-                    userMessage = "Cookies saved and applied to yt-dlp!"
+                    userMessage = "Cookies saved and applied to yt-dlp"
                 )
             }
         } else {
@@ -161,17 +157,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _uiState.update {
             it.copy(
                 hasActiveCookies = false,
-                userMessage = "Cookies cleared."
+                userMessage = "Cookies removed"
             )
         }
-    }
-
-    fun retryStartupUpdate() {
-        app.startEngineInitialization(forceUpdate = true)
-    }
-
-    fun dismissInitializingBanner() {
-        _uiState.update { it.copy(isInitializingOrUpdating = false) }
     }
 
     fun onUrlChanged(newUrl: String) {
@@ -305,7 +293,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                                 type = state.selectedType,
                                 title = file.nameWithoutExtension
                             ),
-                            userMessage = "Saved to device Downloads: ${file.name}",
+                            userMessage = "Saved to Downloads: ${file.name}",
                             requiresVerification = false
                         )
                     }
@@ -375,7 +363,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     _uiState.update {
                         it.copy(
                             isUpdatingEngine = false,
-                            userMessage = "Engine update failed: ${err.message}"
+                            userMessage = err.message ?: "Update check failed"
                         )
                     }
                 }
@@ -439,7 +427,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
                 context.startActivity(intent)
             } catch (e2: Exception) {
-                Toast.makeText(context, "Files are saved to your device Downloads folder (/Download)", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Files are saved in your Downloads folder (/Download)", Toast.LENGTH_LONG).show()
             }
         }
     }

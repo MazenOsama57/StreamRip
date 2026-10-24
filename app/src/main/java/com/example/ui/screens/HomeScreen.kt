@@ -1,11 +1,6 @@
 package com.example.ui.screens
 
 import android.content.Context
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,10 +30,9 @@ import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material.icons.filled.VpnKey
 import androidx.compose.material3.AlertDialog
@@ -77,6 +71,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -89,11 +84,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.example.StreamRipApp
 import com.example.data.model.DownloadedFile
 import com.example.data.model.DownloadStatus
 import com.example.data.model.MediaMetadata
 import com.example.data.model.MediaType
+import com.example.ui.components.SettingsDialog
 import com.example.ui.components.YouTubeLoginDialog
 import com.example.ui.viewmodel.AppTab
 import com.example.ui.viewmodel.MainUiState
@@ -115,6 +110,21 @@ fun HomeScreen(
             snackbarHostState.showSnackbar(it)
             viewModel.clearMessage()
         }
+    }
+
+    if (uiState.showSettingsDialog) {
+        SettingsDialog(
+            engineVersion = uiState.engineVersion,
+            isEngineReady = uiState.isEngineReady,
+            isUpdatingEngine = uiState.isUpdatingEngine,
+            hasActiveCookies = uiState.hasActiveCookies,
+            downloadsCount = uiState.downloads.size,
+            onUpdateEngine = viewModel::updateEngine,
+            onOpenCookieDialog = viewModel::openCookieDialog,
+            onClearCookies = viewModel::clearCookies,
+            onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) },
+            onDismiss = viewModel::closeSettingsDialog
+        )
     }
 
     if (uiState.showCookieDialog) {
@@ -139,13 +149,25 @@ fun HomeScreen(
                         Surface(
                             shape = CircleShape,
                             color = MaterialTheme.colorScheme.primaryContainer,
-                            modifier = Modifier.size(36.dp)
+                            modifier = Modifier.size(38.dp)
                         ) {
-                            Box(contentAlignment = Alignment.Center) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(
+                                        brush = Brush.linearGradient(
+                                            colors = listOf(
+                                                MaterialTheme.colorScheme.primary,
+                                                MaterialTheme.colorScheme.tertiary
+                                            )
+                                        )
+                                    )
+                            ) {
                                 Icon(
                                     imageVector = Icons.Default.Download,
                                     contentDescription = "StreamRip",
-                                    tint = MaterialTheme.colorScheme.primary,
+                                    tint = Color.White,
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
@@ -153,68 +175,31 @@ fun HomeScreen(
                         Column {
                             Text(
                                 text = "StreamRip",
-                                style = MaterialTheme.typography.titleMedium.copy(
+                                style = MaterialTheme.typography.titleLarge.copy(
                                     fontWeight = FontWeight.Bold,
                                     letterSpacing = 0.5.sp
-                                )
+                                ),
+                                color = MaterialTheme.colorScheme.onSurface
                             )
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
-                            ) {
-                                Text(
-                                    text = "yt-dlp ${uiState.engineVersion ?: "loading..."}",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                                if (uiState.isEngineReady) {
-                                    Surface(
-                                        shape = RoundedCornerShape(4.dp),
-                                        color = Color(0xFF10B981).copy(alpha = 0.2f)
-                                    ) {
-                                        Text(
-                                            text = "Latest",
-                                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
-                                            color = Color(0xFF10B981),
-                                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
-                                        )
-                                    }
-                                }
-                            }
+                            Text(
+                                text = "Universal Media Downloader",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
                     }
                 },
                 actions = {
-                    // Cookie & Authentication button
+                    // Settings icon containing YT-DLP Core info, updates, and YouTube authentication
                     IconButton(
-                        onClick = { viewModel.openCookieDialog() },
-                        modifier = Modifier.testTag("auth_cookies_button")
+                        onClick = { viewModel.openSettingsDialog() },
+                        modifier = Modifier.testTag("settings_button")
                     ) {
                         Icon(
-                            imageVector = Icons.Default.VpnKey,
-                            contentDescription = "YouTube Authentication / Cookies",
-                            tint = if (uiState.hasActiveCookies) Color(0xFF10B981) else MaterialTheme.colorScheme.onSurfaceVariant
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings & yt-dlp Core",
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
-                    }
-
-                    // Check for updates
-                    IconButton(
-                        onClick = { viewModel.updateEngine() },
-                        enabled = !uiState.isUpdatingEngine,
-                        modifier = Modifier.testTag("update_engine_button")
-                    ) {
-                        if (uiState.isUpdatingEngine) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(20.dp),
-                                strokeWidth = 2.dp,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Default.Refresh,
-                                contentDescription = "Check for yt-dlp updates"
-                            )
-                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -229,19 +214,6 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Automatic Engine Updating Banner while loading the app
-            AnimatedVisibility(
-                visible = uiState.isInitializingOrUpdating,
-                enter = fadeIn() + expandVertically(),
-                exit = fadeOut() + shrinkVertically()
-            ) {
-                EngineUpdateLoadingBanner(
-                    initState = uiState.engineInitState,
-                    onDismiss = viewModel::dismissInitializingBanner,
-                    onRetry = viewModel::retryStartupUpdate
-                )
-            }
-
             PrimaryTabRow(
                 selectedTabIndex = if (uiState.activeTab == AppTab.DOWNLOAD) 0 else 1,
                 containerColor = MaterialTheme.colorScheme.surface
@@ -296,10 +268,7 @@ fun HomeScreen(
                         onFetchInfo = viewModel::fetchMetadata,
                         onStartDownload = viewModel::startDownload,
                         onCancelDownload = viewModel::cancelDownload,
-                        onUpdateEngineAndRetry = {
-                            viewModel.updateEngine()
-                            viewModel.startDownload()
-                        },
+                        onOpenSettings = viewModel::openSettingsDialog,
                         onOpenCookieDialog = viewModel::openCookieDialog,
                         onOpenMedia = { file, type -> viewModel.openMediaFile(context, file, type) },
                         onShareMedia = { file, type -> viewModel.shareMediaFile(context, file, type) },
@@ -322,115 +291,6 @@ fun HomeScreen(
 }
 
 @Composable
-private fun EngineUpdateLoadingBanner(
-    initState: StreamRipApp.InitState,
-    onDismiss: () -> Unit,
-    onRetry: () -> Unit
-) {
-    Card(
-        shape = RoundedCornerShape(0.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("engine_update_loading_banner")
-    ) {
-        Column(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    when (initState) {
-                        is StreamRipApp.InitState.Progress -> {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(18.dp),
-                                strokeWidth = 2.5.dp,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                        is StreamRipApp.InitState.Ready -> {
-                            Icon(
-                                Icons.Default.CheckCircle,
-                                contentDescription = null,
-                                tint = Color(0xFF10B981),
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                        is StreamRipApp.InitState.Error -> {
-                            Icon(
-                                Icons.Default.ErrorOutline,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.error,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                        else -> {
-                            Icon(
-                                Icons.Default.SystemUpdate,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                    }
-
-                    Column {
-                        Text(
-                            text = "Auto-Updating Libraries & Engines",
-                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        val statusText = when (initState) {
-                            is StreamRipApp.InitState.Progress -> "${initState.statusMessage} (${initState.currentStep}/${initState.totalSteps})"
-                            is StreamRipApp.InitState.Ready -> "Updated to latest release: ${initState.version} (${initState.updateNote})"
-                            is StreamRipApp.InitState.Warning -> initState.message
-                            is StreamRipApp.InitState.Error -> initState.message
-                        }
-                        Text(
-                            text = statusText,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-
-                Row {
-                    if (initState is StreamRipApp.InitState.Error) {
-                        TextButton(onClick = onRetry) {
-                            Text("Retry")
-                        }
-                    }
-                    TextButton(onClick = onDismiss) {
-                        Text("Hide")
-                    }
-                }
-            }
-
-            if (initState is StreamRipApp.InitState.Progress) {
-                LinearProgressIndicator(
-                    progress = { (initState.currentStep.toFloat() / initState.totalSteps.toFloat()).coerceIn(0f, 1f) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(4.dp)
-                        .clip(RoundedCornerShape(2.dp)),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant
-                )
-            }
-        }
-    }
-}
-
-@Composable
 private fun DownloaderContent(
     uiState: MainUiState,
     onUrlChanged: (String) -> Unit,
@@ -442,7 +302,7 @@ private fun DownloaderContent(
     onFetchInfo: () -> Unit,
     onStartDownload: () -> Unit,
     onCancelDownload: () -> Unit,
-    onUpdateEngineAndRetry: () -> Unit,
+    onOpenSettings: () -> Unit,
     onOpenCookieDialog: () -> Unit,
     onOpenMedia: (java.io.File, MediaType) -> Unit,
     onShareMedia: (java.io.File, MediaType) -> Unit,
@@ -460,9 +320,9 @@ private fun DownloaderContent(
             Spacer(modifier = Modifier.height(4.dp))
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
                 ),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(18.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(
@@ -482,7 +342,7 @@ private fun DownloaderContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("url_input_field"),
-                        placeholder = { Text("https://www.youtube.com/watch?v=...") },
+                        placeholder = { Text("Paste video or audio URL...") },
                         leadingIcon = {
                             Icon(Icons.Default.Link, contentDescription = "URL Link")
                         },
@@ -547,9 +407,9 @@ private fun DownloaderContent(
         item {
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
                 ),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(18.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .testTag("format_selection_card")
@@ -559,7 +419,7 @@ private fun DownloaderContent(
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     Text(
-                        text = "Choose Output Format",
+                        text = "Output Format",
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurface
@@ -679,7 +539,7 @@ private fun DownloaderContent(
                     status = uiState.status,
                     requiresVerification = uiState.requiresVerification,
                     onRetry = onStartDownload,
-                    onUpdateEngineAndRetry = onUpdateEngineAndRetry,
+                    onOpenSettings = onOpenSettings,
                     onOpenCookieDialog = onOpenCookieDialog
                 )
             }
@@ -1072,7 +932,7 @@ private fun DownloadFailedCard(
     status: DownloadStatus.Failed,
     requiresVerification: Boolean,
     onRetry: () -> Unit,
-    onUpdateEngineAndRetry: () -> Unit,
+    onOpenSettings: () -> Unit,
     onOpenCookieDialog: () -> Unit
 ) {
     Card(
@@ -1132,24 +992,25 @@ private fun DownloadFailedCard(
                     }
                 } else {
                     OutlinedButton(
-                        onClick = onRetry,
-                        shape = RoundedCornerShape(8.dp)
+                        onClick = onOpenSettings,
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.testTag("open_settings_from_error_button")
                     ) {
-                        Text("Retry")
+                        Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("Settings")
                     }
 
                     Button(
-                        onClick = onUpdateEngineAndRetry,
+                        onClick = onRetry,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         ),
                         shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.testTag("update_and_retry_button")
+                        modifier = Modifier.testTag("retry_button")
                     ) {
-                        Icon(Icons.Default.SystemUpdate, contentDescription = null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("Update Engine & Retry")
+                        Text("Retry")
                     }
                 }
             }
@@ -1238,7 +1099,7 @@ private fun LibraryContent(
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "/storage/emulated/0/Download • Accessible to other apps",
+                            text = "/Download • Accessible to other apps",
                             style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

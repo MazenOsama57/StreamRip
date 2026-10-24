@@ -24,8 +24,7 @@ class YoutubeDLRepository(private val context: Context) {
 
     val cookieRepo = CookieRepository(context)
 
-    // Dedicated internal staging directory where yt-dlp and ffmpeg have 100% POSIX r/w access
-    // to build, merge, and convert media without leaving partial .part files in public storage
+    // Dedicated internal staging directory where yt-dlp and ffmpeg have POSIX r/w access
     private val stagingDir: File
         get() {
             val dir = File(context.cacheDir, "streamrip_staging")
@@ -40,7 +39,6 @@ class YoutubeDLRepository(private val context: Context) {
         get() = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 
     init {
-        // Automatically migrate any legacy files from the old private app directory to the public Downloads folder
         migrateOldAppFiles()
     }
 
@@ -57,25 +55,36 @@ class YoutubeDLRepository(private val context: Context) {
             val status = YoutubeDL.getInstance().updateYoutubeDL(context)
             val version = YoutubeDL.getInstance().version(context) ?: "latest"
             val statusText = when (status) {
-                YoutubeDL.UpdateStatus.DONE -> "Successfully updated yt-dlp to latest version ($version)"
-                YoutubeDL.UpdateStatus.ALREADY_UP_TO_DATE -> "yt-dlp is already at latest version ($version)"
-                else -> "yt-dlp synchronized: $version"
+                YoutubeDL.UpdateStatus.DONE -> "Successfully updated yt-dlp to $version"
+                YoutubeDL.UpdateStatus.ALREADY_UP_TO_DATE -> "yt-dlp is already up to date ($version)"
+                else -> "yt-dlp core synchronized: $version"
             }
             Log.i("YoutubeDLRepo", statusText)
             Result.success(statusText)
         } catch (e: Exception) {
             Log.e("YoutubeDLRepo", "Update failed", e)
-            Result.failure(e)
+            val currentVer = getEngineVersion() ?: "bundled"
+            Result.failure(Exception("Could not download update: ${e.message ?: "Network error"}. Current version: $currentVer"))
         }
     }
 
+    private fun isYouTubeUrl(url: String): Boolean {
+        val lower = url.lowercase()
+        return lower.contains("youtube.com") || lower.contains("youtu.be")
+    }
+
     suspend fun fetchMetadata(url: String): Result<MediaMetadata> = withContext(Dispatchers.IO) {
-        val clientCandidates = listOf(
-            "youtube:player_client=default,ios",
-            "youtube:player_client=default,-web",
-            "youtube:player_client=ios",
-            "youtube:player_client=tv_embedded,web_embedded"
-        )
+        val isYt = isYouTubeUrl(url)
+        val clientCandidates = if (isYt) {
+            listOf(
+                "youtube:player_client=default,ios",
+                "youtube:player_client=default,-web",
+                "youtube:player_client=ios",
+                "youtube:player_client=tv_embedded,web_embedded"
+            )
+        } else {
+            listOf("")
+        }
 
         var lastException: Throwable? = null
 
@@ -85,7 +94,9 @@ class YoutubeDLRepository(private val context: Context) {
                     addOption("--no-playlist")
                     addOption("--no-update")
                     addOption("--no-check-certificates")
-                    addOption("--extractor-args", clientArg)
+                    if (clientArg.isNotBlank()) {
+                        addOption("--extractor-args", clientArg)
+                    }
                     cookieRepo.getCookiesFilePath()?.let { cookiePath ->
                         addOption("--cookies", cookiePath)
                     }
@@ -94,8 +105,8 @@ class YoutubeDLRepository(private val context: Context) {
 
                 val info = YoutubeDL.getInstance().getInfo(request)
                 val metadata = MediaMetadata(
-                    title = info.title ?: "Unknown Media",
-                    uploader = info.uploader ?: info.uploaderId ?: "Unknown Creator",
+                    title = info.title ?: "Media Title",
+                    uploader = info.uploader ?: info.uploaderId ?: "Creator",
                     durationSeconds = info.duration,
                     thumbnailUrl = info.thumbnail,
                     webpageUrl = info.webpageUrl ?: url,
@@ -106,8 +117,11 @@ class YoutubeDLRepository(private val context: Context) {
                 lastException = e
                 val msg = e.message ?: ""
                 if (msg.contains("Sign in to confirm you're not a bot", ignoreCase = true)) {
-                    Log.w("YoutubeDLRepo", "Bot detection hit with $clientArg, attempting alternative...")
+                    Log.w("YoutubeDLRepo", "Bot detection hit, checking alternative client strategy...")
                     continue
+                }
+                if (!isYt) {
+                    break
                 }
             }
         }
@@ -124,12 +138,17 @@ class YoutubeDLRepository(private val context: Context) {
         processId: String,
         onProgress: (Float, Long, String) -> Unit
     ): Result<File> = withContext(Dispatchers.IO) {
-        val clientStrategies = listOf(
-            "youtube:player_client=default,ios",
-            "youtube:player_client=default,-web",
-            "youtube:player_client=ios",
-            "youtube:player_client=tv_embedded,web_embedded"
-        )
+        val isYt = isYouTubeUrl(url)
+        val clientStrategies = if (isYt) {
+            listOf(
+                "youtube:player_client=default,ios",
+                "youtube:player_client=default,-web",
+                "youtube:player_client=ios",
+                "youtube:player_client=tv_embedded,web_embedded"
+            )
+        } else {
+            listOf("")
+        }
 
         var lastException: Throwable? = null
 
@@ -148,15 +167,10 @@ class YoutubeDLRepository(private val context: Context) {
                 lastException = e
                 val msg = e.message ?: ""
                 if (msg.contains("Sign in to confirm you're not a bot", ignoreCase = true)) {
-                    Log.w("YoutubeDLRepo", "Client $clientArg hit bot check, trying alternative...")
+                    Log.w("YoutubeDLRepo", "Client strategy hit bot check, trying alternative...")
                     continue
-                } else if (msg.contains("older than 90 days", ignoreCase = true)) {
-                    try {
-                        updateEngine()
-                    } catch (_: Exception) {}
-                    continue
-                } else {
-                    return@withContext Result.failure(processException(e))
+                } else if (!isYt) {
+                    break
                 }
             }
         }
@@ -164,7 +178,7 @@ class YoutubeDLRepository(private val context: Context) {
         Result.failure(processException(lastException ?: Exception("Download failed.")))
     }
 
-    private suspend fun executeDownloadAttempt(
+    private fun executeDownloadAttempt(
         url: String,
         type: MediaType,
         videoQuality: String,
@@ -182,7 +196,9 @@ class YoutubeDLRepository(private val context: Context) {
         request.addOption("--no-mtime")
         request.addOption("--no-update")
         request.addOption("--no-check-certificates")
-        request.addOption("--extractor-args", clientArg)
+        if (clientArg.isNotBlank()) {
+            request.addOption("--extractor-args", clientArg)
+        }
 
         // Inject cookies file if available
         cookieRepo.getCookiesFilePath()?.let { cookiePath ->
@@ -194,8 +210,6 @@ class YoutubeDLRepository(private val context: Context) {
 
         when (type) {
             MediaType.VIDEO_MP4 -> {
-                // Highly resilient format selector that never fails with "requested format not available":
-                // Tries requested resolution, then best video+audio, then single best stream
                 val formatSelector = when (videoQuality) {
                     "1080p" -> "bv*[height<=?1080]+ba/b[height<=?1080]/bv*+ba/b/best"
                     "720p"  -> "bv*[height<=?720]+ba/b[height<=?720]/bv*+ba/b/best"
@@ -206,11 +220,10 @@ class YoutubeDLRepository(private val context: Context) {
                 request.addOption("-f", formatSelector)
                 request.addOption("-S", "res,ext:mp4:m4a")
                 request.addOption("--merge-output-format", "mp4")
-                request.addOption("--recode-video", "mp4")
+                // Remux to mp4 container without re-encoding to avoid transcoding freezes
+                request.addOption("--remux-video", "mp4")
             }
             MediaType.AUDIO_MP3 -> {
-                // Official yt-dlp audio extraction with resilient fallback:
-                // ba/b/best ensures streams without separate audio stream also convert cleanly
                 request.addOption("-f", "ba/b/best")
                 request.addOption("-x")
                 request.addOption("--audio-format", "mp3")
@@ -232,7 +245,7 @@ class YoutubeDLRepository(private val context: Context) {
             onProgress(progress, eta, line)
         }
 
-        Log.d("YoutubeDLRepo", "Download finished with exit code ${response.exitCode}")
+        Log.d("YoutubeDLRepo", "Download completed with exit code ${response.exitCode}")
 
         val allFiles = targetDir.listFiles() ?: emptyArray()
         val targetExt = if (type == MediaType.VIDEO_MP4) "mp4" else "mp3"
@@ -245,20 +258,13 @@ class YoutubeDLRepository(private val context: Context) {
                 .maxByOrNull { it.lastModified() }
 
         return if (newlyCreated != null && newlyCreated.exists() && newlyCreated.length() > 0) {
-            // Save the finished media file into the public Downloads folder so other apps can access it!
             saveToPublicDownloads(newlyCreated, type)
         } else {
-            Result.failure(Exception("File conversion completed, but destination file could not be located."))
+            Result.failure(Exception("File was converted but output file could not be accessed."))
         }
     }
 
-    /**
-     * Saves the downloaded media file into the public Downloads directory (/storage/emulated/0/Download/)
-     * using MediaStore.Downloads (on Android 10+) and direct file copy with MediaScannerConnection.
-     * This ensures the file is immediately accessible to file managers, music players, video players,
-     * and external apps.
-     */
-    suspend fun saveToPublicDownloads(stagingFile: File, type: MediaType): Result<File> = withContext(Dispatchers.IO) {
+    private fun saveToPublicDownloads(stagingFile: File, type: MediaType): Result<File> {
         try {
             val fileName = sanitizeFileName(stagingFile.name)
             val mimeType = if (type == MediaType.VIDEO_MP4) "video/mp4" else "audio/mpeg"
@@ -269,7 +275,7 @@ class YoutubeDLRepository(private val context: Context) {
 
             var savedFile: File? = null
 
-            // 1. On Android 10+ (API 29+), publish to MediaStore.Downloads
+            // On Android 10+ (API 29+), publish to MediaStore.Downloads
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val resolver = context.contentResolver
                 val contentValues = ContentValues().apply {
@@ -292,13 +298,10 @@ class YoutubeDLRepository(private val context: Context) {
                         contentValues.put(MediaStore.MediaColumns.IS_PENDING, 0)
                         resolver.update(uri, contentValues, null, null)
 
-                        // Check the path created in public Downloads
                         val candidate = File(pubDir, fileName)
                         savedFile = if (candidate.exists()) candidate else File(pubDir, fileName)
-
-                        Log.i("YoutubeDLRepo", "Successfully published to MediaStore.Downloads: $uri -> ${savedFile.absolutePath}")
                     } catch (e: Exception) {
-                        Log.e("YoutubeDLRepo", "Failed to write via MediaStore.Downloads: ${e.message}", e)
+                        Log.e("YoutubeDLRepo", "Failed to write via MediaStore: ${e.message}", e)
                         try {
                             resolver.delete(uri, null, null)
                         } catch (_: Exception) {}
@@ -306,32 +309,30 @@ class YoutubeDLRepository(private val context: Context) {
                 }
             }
 
-            // 2. Direct file write to /storage/emulated/0/Download if not already written or on older OS
+            // Direct file write fallback to /storage/emulated/0/Download
             if (savedFile == null || !savedFile.exists()) {
                 val directTarget = File(pubDir, fileName)
                 stagingFile.copyTo(directTarget, overwrite = true)
                 savedFile = directTarget
             }
 
-            // 3. Scan the public file into the Android media catalog so music players & gallery see it immediately
+            // Index in Android media scanner
             MediaScannerConnection.scanFile(
                 context,
                 arrayOf(savedFile.absolutePath),
                 arrayOf(mimeType)
             ) { path, scannedUri ->
-                Log.i("YoutubeDLRepo", "Scanned media into Android system: $path -> $scannedUri")
+                Log.i("YoutubeDLRepo", "Media catalog indexed: $path -> $scannedUri")
             }
 
-            // 4. Clean up staging file so internal app cache is freed
             if (stagingFile.absolutePath != savedFile.absolutePath) {
                 stagingFile.delete()
             }
 
-            Result.success(savedFile)
+            return Result.success(savedFile)
         } catch (e: Exception) {
             Log.e("YoutubeDLRepo", "Failed to save file to public Downloads folder: ${e.message}", e)
-            // If copying to public Downloads had a permission problem, return staging file as fallback
-            Result.success(stagingFile)
+            return Result.success(stagingFile)
         }
     }
 
@@ -364,20 +365,20 @@ class YoutubeDLRepository(private val context: Context) {
                 }
             }
         } catch (e: Exception) {
-            Log.w("YoutubeDLRepo", "Migration of old app files skipped: ${e.message}")
+            Log.w("YoutubeDLRepo", "Migration skipped: ${e.message}")
         }
     }
 
     private fun processException(e: Throwable): Exception {
         val raw = e.message ?: return Exception("Operation failed")
         if (raw.contains("Sign in to confirm you're not a bot", ignoreCase = true)) {
-            return BotVerificationException("YouTube requires verification for this video. Tap 'Sign in to YouTube' to authenticate cookies and proceed.")
+            return BotVerificationException("YouTube requires verification for this video. Open Settings > YouTube Authentication to sign in or add cookies.")
         }
         val lines = raw.lines()
         val errorLine = lines.firstOrNull { it.startsWith("ERROR:") }
             ?: lines.firstOrNull { it.contains("unavailable", true) || it.contains("Requested format", true) || it.contains("Unsupported URL", true) }
             ?: lines.firstOrNull { it.isNotBlank() }
-            ?: "Download failed. Please check your network connection and URL."
+            ?: "Download failed. Please check network and URL."
 
         return Exception(errorLine.removePrefix("ERROR:").trim())
     }
@@ -396,7 +397,6 @@ class YoutubeDLRepository(private val context: Context) {
         val results = mutableListOf<DownloadedFile>()
         val seenPaths = mutableSetOf<String>()
 
-        // 1. Scan public Downloads directory (/storage/emulated/0/Download)
         val pubDir = publicDownloadsDir
         if (pubDir.exists()) {
             val files = pubDir.listFiles() ?: emptyArray()
@@ -422,7 +422,6 @@ class YoutubeDLRepository(private val context: Context) {
                 }
         }
 
-        // 2. Also check stagingDir in case any download was kept there
         val stagingFiles = stagingDir.listFiles() ?: emptyArray()
         stagingFiles
             .filter { it.isFile && !seenPaths.contains(it.absolutePath) && (it.extension.equals("mp4", true) || it.extension.equals("mp3", true)) }
@@ -452,7 +451,6 @@ class YoutubeDLRepository(private val context: Context) {
                 deleted = true
             }
 
-            // Also clean up MediaStore index on Android 10+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 try {
                     context.contentResolver.delete(
@@ -465,13 +463,12 @@ class YoutubeDLRepository(private val context: Context) {
                 }
             }
 
-            // Trigger scanner to remove from system catalog
             MediaScannerConnection.scanFile(
                 context,
                 arrayOf(file.absolutePath),
                 null
             ) { path, _ ->
-                Log.d("YoutubeDLRepo", "Cleaned up media record for $path")
+                Log.d("YoutubeDLRepo", "Media record cleaned: $path")
             }
 
             deleted

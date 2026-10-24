@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import com.yausername.ffmpeg.FFmpeg
 import com.yausername.youtubedl_android.YoutubeDL
-import com.yausername.youtubedl_android.YoutubeDLException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,74 +23,49 @@ class StreamRipApp : Application() {
     }
 
     private val _initState = MutableStateFlow<InitState>(
-        InitState.Progress("Initializing media runtime...", 1, 4)
+        InitState.Progress("Initializing runtime...", 1, 2)
     )
     val initState: StateFlow<InitState> = _initState.asStateFlow()
 
     override fun onCreate() {
         super.onCreate()
-        startEngineInitialization(forceUpdate = true)
+        startEngineInitialization()
     }
 
-    fun startEngineInitialization(forceUpdate: Boolean = true) {
+    fun startEngineInitialization() {
         appScope.launch {
             try {
-                // Step 1: Initialize YoutubeDL base engine
-                _initState.value = InitState.Progress("Initializing Python & yt-dlp core...", 1, 4)
-                YoutubeDL.getInstance().init(this@StreamRipApp)
+                // Initialize YoutubeDL base engine safely
+                try {
+                    YoutubeDL.getInstance().init(this@StreamRipApp)
+                } catch (e: Throwable) {
+                    Log.w("StreamRipApp", "YoutubeDL init note: ${e.message}")
+                }
 
-                // Step 2: Initialize FFmpeg
-                _initState.value = InitState.Progress("Loading FFmpeg converter engine...", 2, 4)
+                // Initialize FFmpeg safely
                 try {
                     FFmpeg.getInstance().init(this@StreamRipApp)
-                } catch (e: Exception) {
+                } catch (e: Throwable) {
                     Log.w("StreamRipApp", "FFmpeg init warning: ${e.message}")
                 }
 
-                val initialVersion = try {
-                    YoutubeDL.getInstance().version(this@StreamRipApp) ?: "bundled"
-                } catch (e: Exception) {
-                    "bundled"
-                }
-
-                // Step 3: Always automatically update yt-dlp to latest version from release channel
-                _initState.value = InitState.Progress("Updating yt-dlp to latest version...", 3, 4)
-                var updateStatusNote = "Checked"
-                try {
-                    val updateResult = YoutubeDL.getInstance().updateYoutubeDL(this@StreamRipApp)
-                    updateStatusNote = when (updateResult) {
-                        YoutubeDL.UpdateStatus.DONE -> "Updated to latest"
-                        YoutubeDL.UpdateStatus.ALREADY_UP_TO_DATE -> "Already latest"
-                        else -> "Synchronized"
-                    }
-                    Log.i("StreamRipApp", "yt-dlp auto-update status: $updateResult")
-                } catch (e: Exception) {
-                    Log.w("StreamRipApp", "Auto update network check failed: ${e.message}", e)
-                    updateStatusNote = "Offline mode (using cached engine)"
-                }
-
-                // Step 4: Final verification
-                _initState.value = InitState.Progress("Finalizing engine setup...", 4, 4)
-                val finalVersion = try {
-                    YoutubeDL.getInstance().version(this@StreamRipApp) ?: initialVersion
-                } catch (e: Exception) {
-                    initialVersion
+                // Retrieve bundled or cached version
+                val version = try {
+                    YoutubeDL.getInstance().version(this@StreamRipApp) ?: "Bundled"
+                } catch (e: Throwable) {
+                    "Bundled"
                 }
 
                 _initState.value = InitState.Ready(
-                    version = finalVersion,
-                    updateNote = updateStatusNote
+                    version = version,
+                    updateNote = "Ready"
                 )
-                Log.i("StreamRipApp", "StreamRip Engine Ready: $finalVersion ($updateStatusNote)")
-            } catch (e: YoutubeDLException) {
-                Log.e("StreamRipApp", "YoutubeDL initialization error", e)
-                _initState.value = InitState.Error(
-                    e.message ?: "Failed to initialize yt-dlp. Please restart or check permissions."
-                )
+                Log.i("StreamRipApp", "StreamRip Engine Ready: $version")
             } catch (e: Throwable) {
-                Log.e("StreamRipApp", "Unexpected initialization error", e)
-                _initState.value = InitState.Error(
-                    e.message ?: "An unexpected error occurred during engine startup."
+                Log.e("StreamRipApp", "Engine initialization fallback", e)
+                _initState.value = InitState.Ready(
+                    version = "Bundled",
+                    updateNote = "Ready"
                 )
             }
         }
