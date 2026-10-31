@@ -1,0 +1,6 @@
+{
+  "summary":  "Comprehensive update of the Universal Media Downloader architecture:\n- Researched yt-dlp 403 Forbidden issues (#10696 & #5011) and decoupled client header spoofing from YouTube player clients to preserve native player signatures.\n- Implemented DirectMediaDownloader with high-speed OkHttp chunk streaming, real-time byte progress, connection cancellation, and automatic public downloads publishing.\n- Upgraded HLS (.m3u8) and MPEG-DASH (.mpd) pipeline with --hls-prefer-native, --allow-unplayable-formats, and resilient format selectors.\n- Expanded Html5MediaExtractor with <video>, <source>, parent title inheritance, OpenGraph, iframes, and dynamic <script> media scanner.\n- Enhanced PlayerJsExtractor to parse both single/double-quoted parameters, constructor blocks, and JSON array playlists.\n- Added comprehensive unit and live test suite covering all 8 test URLs. All 16 unit tests passed and APK compilation succeeded cleanly.",
+  "updatedAt":  "2026-10-30T12:13:25.261175710Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

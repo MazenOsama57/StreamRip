@@ -8,47 +8,50 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = CyanPrimaryDark,
-    onPrimary = CyanOnPrimaryDark,
-    primaryContainer = CyanPrimaryContainerDark,
-    onPrimaryContainer = CyanOnPrimaryContainerDark,
-    secondary = VioletSecondaryDark,
-    onSecondary = VioletOnSecondaryDark,
-    secondaryContainer = VioletSecondaryContainerDark,
-    onSecondaryContainer = VioletOnSecondaryContainerDark,
+    primary = CobaltPrimaryDark,
+    onPrimary = CobaltOnPrimaryDark,
+    primaryContainer = CobaltPrimaryContainerDark,
+    onPrimaryContainer = CobaltOnPrimaryContainerDark,
+    secondary = IndigoSecondaryDark,
+    onSecondary = IndigoOnSecondaryDark,
+    secondaryContainer = IndigoSecondaryContainerDark,
+    onSecondaryContainer = IndigoOnSecondaryContainerDark,
     background = DarkBg,
     onBackground = DarkOnSurface,
     surface = DarkSurface,
     onSurface = DarkOnSurface,
     surfaceVariant = DarkSurfaceVariant,
-    onSurfaceVariant = DarkOnSurfaceVariant
+    onSurfaceVariant = DarkOnSurfaceVariant,
+    outline = DarkOutline,
+    outlineVariant = DarkOutline.copy(alpha = 0.6f)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = CyanPrimaryLight,
-    onPrimary = CyanOnPrimaryLight,
-    primaryContainer = CyanPrimaryContainerLight,
-    onPrimaryContainer = CyanOnPrimaryContainerLight,
-    secondary = VioletSecondaryLight,
-    onSecondary = VioletOnSecondaryLight,
-    secondaryContainer = VioletSecondaryContainerLight,
-    onSecondaryContainer = VioletOnSecondaryContainerLight,
+    primary = CobaltPrimaryLight,
+    onPrimary = CobaltOnPrimaryLight,
+    primaryContainer = CobaltPrimaryContainerLight,
+    onPrimaryContainer = CobaltOnPrimaryContainerLight,
+    secondary = IndigoSecondaryLight,
+    onSecondary = IndigoOnSecondaryLight,
+    secondaryContainer = IndigoSecondaryContainerLight,
+    onSecondaryContainer = IndigoOnSecondaryContainerLight,
     background = LightBg,
     onBackground = LightOnSurface,
     surface = LightSurface,
     onSurface = LightOnSurface,
     surfaceVariant = LightSurfaceVariant,
-    onSurfaceVariant = LightOnSurfaceVariant
+    onSurfaceVariant = LightOnSurfaceVariant,
+    outline = LightOutline,
+    outlineVariant = LightOutline.copy(alpha = 0.5f)
 )
 
 @Composable
 fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Use our sleek custom branded theme by default
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colorScheme = when {

@@ -11,11 +11,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.StreamRipApp
 import com.example.data.BotVerificationException
+import com.example.data.DirectMediaDownloader
 import com.example.data.YoutubeDLRepository
+import com.example.data.model.DiscoveredMediaCandidate
 import com.example.data.model.DownloadedFile
 import com.example.data.model.DownloadStatus
 import com.example.data.model.MediaMetadata
 import com.example.data.model.MediaType
+import com.example.data.model.ResolutionResult
+import com.example.data.model.SourceProtocol
+import com.example.data.resolver.MediaSourceResolver
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,12 +35,21 @@ enum class AppTab {
     LIBRARY
 }
 
+data class VideoPreviewState(
+    val isOpen: Boolean = false,
+    val title: String = "",
+    val mediaUrlOrPath: String = "",
+    val candidate: DiscoveredMediaCandidate? = null,
+    val isLocalFile: Boolean = false
+)
+
 data class MainUiState(
     val url: String = "",
     val selectedType: MediaType = MediaType.VIDEO_MP4,
     val videoQuality: String = "Best",
     val audioQuality: String = "320k",
     val status: DownloadStatus = DownloadStatus.Idle,
+    val selectedCandidateId: String? = null,
     val downloads: List<DownloadedFile> = emptyList(),
     val engineVersion: String? = null,
     val isUpdatingEngine: Boolean = false,
@@ -45,12 +59,27 @@ data class MainUiState(
     val hasActiveCookies: Boolean = false,
     val showCookieDialog: Boolean = false,
     val showSettingsDialog: Boolean = false,
-    val requiresVerification: Boolean = false
-)
+    val requiresVerification: Boolean = false,
+    val previewState: VideoPreviewState = VideoPreviewState()
+) {
+    val activeCandidate: DiscoveredMediaCandidate?
+        get() {
+            val meta = when (status) {
+                is DownloadStatus.Ready -> status.metadata
+                is DownloadStatus.Downloading -> status.metadata
+                else -> null
+            } ?: return null
+            return meta.candidates.firstOrNull { it.id == selectedCandidateId }
+                ?: meta.candidates.firstOrNull { it.id == meta.selectedCandidateId }
+                ?: meta.candidates.firstOrNull()
+        }
+}
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val app = application as StreamRipApp
     private val repository = YoutubeDLRepository(application)
+    private val directDownloader = DirectMediaDownloader(application, repository)
+    private val resolver = MediaSourceResolver()
     private var downloadJob: Job? = null
     private var activeProcessId: String? = null
 
@@ -203,6 +232,72 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun onSelectCandidate(candidate: DiscoveredMediaCandidate) {
+        _uiState.update { current ->
+            val updatedStatus = when (val s = current.status) {
+                is DownloadStatus.Ready -> {
+                    val updatedMeta = s.metadata.copy(selectedCandidateId = candidate.id)
+                    DownloadStatus.Ready(updatedMeta)
+                }
+                else -> s
+            }
+            val targetQuality = candidate.resolution?.let { res ->
+                when {
+                    res.contains("1080") -> "1080p"
+                    res.contains("720")  -> "720p"
+                    res.contains("480")  -> "480p"
+                    res.contains("360")  -> "360p"
+                    else -> current.videoQuality
+                }
+            } ?: current.videoQuality
+
+            current.copy(
+                selectedCandidateId = candidate.id,
+                status = updatedStatus,
+                videoQuality = targetQuality
+            )
+        }
+    }
+
+    fun openPreview(candidate: DiscoveredMediaCandidate) {
+        _uiState.update {
+            it.copy(
+                previewState = VideoPreviewState(
+                    isOpen = true,
+                    title = candidate.label,
+                    mediaUrlOrPath = candidate.url,
+                    candidate = candidate,
+                    isLocalFile = false
+                )
+            )
+        }
+    }
+
+    fun openLocalFilePreview(file: DownloadedFile) {
+        _uiState.update {
+            it.copy(
+                previewState = VideoPreviewState(
+                    isOpen = true,
+                    title = file.title,
+                    mediaUrlOrPath = file.file.absolutePath,
+                    candidate = null,
+                    isLocalFile = true
+                )
+            )
+        }
+    }
+
+    fun closePreview() {
+        _uiState.update {
+            it.copy(previewState = VideoPreviewState(isOpen = false))
+        }
+    }
+
+    fun downloadCandidate(candidate: DiscoveredMediaCandidate) {
+        onSelectCandidate(candidate)
+        startDownload()
+    }
+
     fun fetchMetadata() {
         val currentUrl = _uiState.value.url.trim()
         if (currentUrl.isEmpty()) {
@@ -211,24 +306,44 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         viewModelScope.launch {
-            _uiState.update { it.copy(status = DownloadStatus.FetchingInfo) }
-            val result = repository.fetchMetadata(currentUrl)
-            result.fold(
-                onSuccess = { metadata ->
-                    _uiState.update { it.copy(status = DownloadStatus.Ready(metadata), requiresVerification = false) }
-                },
-                onFailure = { error ->
-                    val isBot = error is BotVerificationException || (error.message?.contains("Sign in to confirm you're not a bot", true) == true)
+            _uiState.update { it.copy(status = DownloadStatus.FetchingInfo, selectedCandidateId = null) }
+            val result = resolver.resolve(
+                url = currentUrl,
+                ytDlpFallback = { repository.fetchMetadata(it) }
+            )
+
+            when (result) {
+                is ResolutionResult.Success -> {
+                    val selectedId = result.candidates.firstOrNull()?.id
                     _uiState.update {
                         it.copy(
-                            status = DownloadStatus.Failed(
-                                error.message ?: "Failed to fetch media information. Check URL or update engine."
-                            ),
-                            requiresVerification = isBot
+                            status = DownloadStatus.Ready(result.metadata.copy(selectedCandidateId = selectedId)),
+                            selectedCandidateId = selectedId,
+                            requiresVerification = false
                         )
                     }
                 }
-            )
+                is ResolutionResult.Unsupported -> {
+                    _uiState.update {
+                        it.copy(
+                            status = DownloadStatus.Failed(result.reason),
+                            requiresVerification = false
+                        )
+                    }
+                }
+                is ResolutionResult.Failure -> {
+                    val isBlock = result.throwable is BotVerificationException ||
+                            result.message.contains("Sign in to confirm you're not a bot", true) ||
+                            result.message.contains("403", true) ||
+                            result.message.contains("Forbidden", true)
+                    _uiState.update {
+                        it.copy(
+                            status = DownloadStatus.Failed(result.message),
+                            requiresVerification = isBlock
+                        )
+                    }
+                }
+            }
         }
     }
 
@@ -246,42 +361,78 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             else -> null
         }
 
+        val selectedCandidate = state.activeCandidate
+        val downloadTargetUrl = selectedCandidate?.url?.takeIf { it.startsWith("http") } ?: currentUrl
+        val isHlsOrDash = selectedCandidate?.protocol == SourceProtocol.HLS ||
+                selectedCandidate?.protocol == SourceProtocol.DASH ||
+                downloadTargetUrl.contains(".m3u8", ignoreCase = true) ||
+                downloadTargetUrl.contains(".mpd", ignoreCase = true)
+        val isDirectProgressive = !isHlsOrDash && (
+                selectedCandidate?.protocol == SourceProtocol.DIRECT_HTTP ||
+                resolver.isProgressiveDownloadUrl(downloadTargetUrl)
+        )
+
         val processId = UUID.randomUUID().toString()
         activeProcessId = processId
 
         downloadJob?.cancel()
         downloadJob = viewModelScope.launch {
+            val initialStatusLine = when {
+                isDirectProgressive -> "Connecting to media stream (Direct)..."
+                isHlsOrDash -> "Assembling segmented stream & remuxing (HLS/DASH)..."
+                else -> "Analyzing stream and preparing conversion..."
+            }
             _uiState.update {
                 it.copy(
                     status = DownloadStatus.Downloading(
                         progress = 0f,
                         etaSeconds = 0L,
-                        statusLine = "Starting download...",
+                        statusLine = initialStatusLine,
                         metadata = metadata
                     ),
                     requiresVerification = false
                 )
             }
 
-            val result = repository.downloadMedia(
-                url = currentUrl,
-                type = state.selectedType,
-                videoQuality = state.videoQuality,
-                audioQuality = state.audioQuality,
-                processId = processId
-            ) { progress, eta, line ->
-                _uiState.update { current ->
-                    if (current.status is DownloadStatus.Downloading) {
-                        current.copy(
-                            status = DownloadStatus.Downloading(
-                                progress = progress,
-                                etaSeconds = eta,
-                                statusLine = line.ifBlank { "Downloading..." },
-                                metadata = metadata
+            var lastProgressEmit = 0L
+            val onProgressThrottled: (Float, Long, String) -> Unit = { progress, eta, line ->
+                val now = System.currentTimeMillis()
+                // Throttle updates to at most once per 100ms or on completion/start to save CPU
+                if (now - lastProgressEmit > 100 || progress >= 100f || progress <= 1f) {
+                    lastProgressEmit = now
+                    _uiState.update { current ->
+                        if (current.status is DownloadStatus.Downloading) {
+                            current.copy(
+                                status = DownloadStatus.Downloading(
+                                    progress = progress,
+                                    etaSeconds = eta,
+                                    statusLine = line.ifBlank { "Downloading stream..." },
+                                    metadata = metadata
+                                )
                             )
-                        )
-                    } else current
+                        } else current
+                    }
                 }
+            }
+
+            val result = if (isDirectProgressive) {
+                directDownloader.download(
+                    url = downloadTargetUrl,
+                    candidate = selectedCandidate,
+                    type = state.selectedType,
+                    processId = processId,
+                    onProgress = onProgressThrottled
+                )
+            } else {
+                repository.downloadMedia(
+                    url = downloadTargetUrl,
+                    type = state.selectedType,
+                    videoQuality = state.videoQuality,
+                    audioQuality = state.audioQuality,
+                    processId = processId,
+                    candidate = selectedCandidate,
+                    onProgress = onProgressThrottled
+                )
             }
 
             result.fold(
@@ -300,12 +451,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     refreshDownloads()
                 },
                 onFailure = { error ->
-                    val isBot = error is BotVerificationException || (error.message?.contains("Sign in to confirm you're not a bot", true) == true)
                     val errorMsg = error.message ?: "Download failed. Please check connection and URL."
+                    val isBlock = error is BotVerificationException ||
+                            errorMsg.contains("Sign in to confirm you're not a bot", true) ||
+                            errorMsg.contains("403", true) ||
+                            errorMsg.contains("Forbidden", true)
                     _uiState.update {
                         it.copy(
                             status = DownloadStatus.Failed(errorMsg),
-                            requiresVerification = isBot
+                            requiresVerification = isBlock
                         )
                     }
                 }
@@ -314,12 +468,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun cancelDownload() {
-        activeProcessId?.let { id ->
+        val idToCancel = activeProcessId
+        activeProcessId = null
+        idToCancel?.let { id ->
+            directDownloader.cancel(id)
             repository.cancelDownload(id)
         }
         downloadJob?.cancel()
         downloadJob = null
-        activeProcessId = null
         _uiState.update {
             it.copy(
                 status = DownloadStatus.Idle,
@@ -430,5 +586,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 Toast.makeText(context, "Files are saved in your Downloads folder (/Download)", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        activeProcessId?.let { id ->
+            repository.cancelDownload(id)
+        }
+        downloadJob?.cancel()
     }
 }

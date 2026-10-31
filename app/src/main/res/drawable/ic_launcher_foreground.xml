@@ -1,53 +1,8 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-
-    <!-- Stylized Outer Circular Stream Glow (Safe Zone: 26 to 82) -->
-    <path
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:pathData="M33,67 A26,26 0 1,1 75,67">
-        <aapt:attr name="android:strokeColor">
-            <gradient
-                android:startX="33"
-                android:startY="67"
-                android:endX="75"
-                android:endY="30"
-                android:type="linear">
-                <item android:offset="0.0" android:color="#7C4DFF" />
-                <item android:offset="1.0" android:color="#00E5FF" />
-            </gradient>
-        </aapt:attr>
-    </path>
-
-    <!-- Glowing Bottom Stream Arc Base -->
-    <path
-        android:fillColor="#00E5FF"
-        android:pathData="M38,76 L70,76 A3,3 0 0,1 70,82 L38,82 A3,3 0 0,1 38,76 Z" />
-
-    <!-- Center Download Arrow with Dynamic Play Notch (Coordinates strictly in 27..73) -->
-    <path
-        android:pathData="M50,30 L58,30 A2,2 0 0,1 60,32 L60,49 L69,49 A2,2 0 0,1 70.5,52.3 L55.5,68.2 A2,2 0 0,1 52.5,68.2 L37.5,52.3 A2,2 0 0,1 39,49 L48,49 L48,32 A2,2 0 0,1 50,30 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="54"
-                android:startY="30"
-                android:endX="54"
-                android:endY="69"
-                android:type="linear">
-                <item android:offset="0.0" android:color="#FFFFFF" />
-                <item android:offset="0.6" android:color="#00E5FF" />
-                <item android:offset="1.0" android:color="#7C4DFF" />
-            </gradient>
-        </aapt:attr>
-    </path>
-
-    <!-- Dynamic Play symbol cut accent inside the arrow -->
-    <path
-        android:fillColor="#131B38"
-        android:pathData="M52,41 L52,49 L58,45 Z" />
-
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="66dp"
+        android:height="66dp"
+        android:drawable="@drawable/streamrip_icon_1793303653072"
+        android:gravity="center" />
+</layer-list>

@@ -1,0 +1,854 @@
+11:50:26.498
+Android
+Warning
+ 10-31 09:50:12.848 6526 W/ziparchive: Unable to open '/data/app/~~Vc5dAd4UpG_o-eMaG4r4zg==/com.aistudio.streamrip.vxqk-qiwqfFmXQZGkloHxOLxEwg==/base.dm': No such file or directory
+Unable to open '/data/app/~~Vc5dAd4UpG_o-eMaG4r4zg==/com.aistudio.streamrip.vxqk-qiwqfFmXQZGkloHxOLxEwg==/base.dm': No such file or directory 
+11:50:26.498
+Android
+Warning
+ 10-31 09:50:13.748 6526 W/HWUI    : Unknown dataspace 0 
+11:50:26.498
+Android
+Warning
+ 10-31 09:50:14.351 6526 W/HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+Failed to initialize 101010-2 format, error = EGL_SUCCESS 
+11:52:26.506
+Android
+Warning
+ 10-31 09:52:11.195 6526 W/InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=true, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.aistudio.streamrip.vxqk 
+11:52:26.506
+Android
+Warning
+ 10-31 09:52:15.535 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=ImeCallback=ImeOnBackInvokedCallback@113589021 Callback=android.window.IOnBackInvokedCallback$Stub$Proxy@cd45b34 
+11:52:26.506
+Android
+Warning
+ 10-31 09:52:19.884 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:52:26.506
+Android
+Warning
+ 10-31 09:52:21.305 6526 W/MediaPlayerNative: info/warning (3, 0) 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:24.385 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@ac45fea 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:25.725 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@47b951 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:25.990 6526 W/FrameTracker: Missed App frame:UNKNOWN: 74, 29997, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk>
+Missed SF frame:UNKNOWN: 74, 29997, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk>
+Missed SF frame:UNKNOWN: 66, 30011, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk>
+Missed SF frame:UNKNOWN: 66, 30040, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk>
+Missed SF frame:UNKNOWN: 66, 30133, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk>
+Missed SF frame:UNKNOWN: 66, 30156, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk>
+Missed SF frame:UNKNOWN: 66, 30192, 0, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.aistudio.streamrip.vxqk> 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:28.404 6526 W/.streamrip.vxqk: Cleared Reference was only reachable from finalizer (only reported once) 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:34.429 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: /storage/emulated/0/Download/Direct Media Stream_431057.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:34.834 6526 W/MediaPlayerNative: info/warning (3, 0) 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:37.799 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@784c18c 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:40.903 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@403be53 
+11:52:46.508
+Android
+Warning
+ 10-31 09:52:42.220 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@4134d27 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:48.014 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:49.470 6526 W/MediaPlayerNative: info/warning (3, 0) 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:54.883 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@59ff853 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:54.940 6949 W/libpython.so: type=1400 audit(0.0:88): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:89): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590917 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:54.973 6526 W/MediaPlayer: mediaplayer went away with unhandled events 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:54.974 6526 W/MediaPlayer: mediaplayer went away with unhandled events 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:55.052 6949 W/libpython.so: type=1400 audit(0.0:90): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:55.067 6949 W/audit   : audit_lost=28 audit_rate_limit=5 audit_backlog_limit=64 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:55.980 6949 W/libpython.so: type=1400 audit(0.0:115): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_elementtree.cpython-312.so" dev="dm-44" ino=590579 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:116): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/pyexpat.cpython-312.so" dev="dm-44" ino=590620 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:117): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libexpat.so.1.11.1" dev="dm-44" ino=590150 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:56.012 6949 W/libpython.so: type=1400 audit(0.0:118): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_decimal.cpython-312.so" dev="dm-44" ino=590622 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:56.064 6949 W/libpython.so: type=1400 audit(0.0:119): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libsqlite3.so.3.50.4" dev="dm-44" ino=590200 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:56.075 6949 W/audit   : audit_lost=52 audit_rate_limit=5 audit_backlog_limit=64 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:57.160 6949 W/libpython.so: type=1400 audit(0.0:136): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_heapq.cpython-312.so" dev="dm-44" ino=590629 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:57.432 6949 W/libpython.so: type=1400 audit(0.0:137): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_asyncio.cpython-312.so" dev="dm-44" ino=590591 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:58.848 6968 W/file    : type=1400 audit(0.0:139): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:140): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:52:58.872 6970 W/uname   : type=1400 audit(0.0:141): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:142): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:53:06.579
+Android
+Warning
+ 10-31 09:53:00.400 6949 W/libpython.so: type=1400 audit(0.0:143): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_queue.cpython-312.so" dev="dm-44" ino=590618 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:54:26.610
+Android
+Warning
+ 10-31 09:54:24.182 7283 W/audit   : audit_lost=68 audit_rate_limit=5 audit_backlog_limit=64 
+11:54:26.610
+Android
+Warning
+ 10-31 09:54:24.172 7283 W/libffprobe.so: type=1400 audit(0.0:146): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libtheoradec.so" dev="dm-44" ino=591166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:147): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libfftw3.so" dev="dm-44" ino=591305 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:148): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libhogweed.so.6.11" dev="dm-44" ino=591198 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:149): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libfreetype.so" dev="dm-44" ino=591331 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:150): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libsoxr.so" dev="dm-44" ino=591280 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:54:46.608
+Android
+Warning
+ 10-31 09:54:24.182 7283 W/audit   : audit_lost=68 audit_rate_limit=5 audit_backlog_limit=64 
+11:54:46.608
+Android
+Warning
+ 10-31 09:54:38.078 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: /storage/emulated/0/Download/x36xhzz.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:54:46.608
+Android
+Warning
+ 10-31 09:54:38.533 6526 W/MediaPlayerNative: info/warning (3, 0) 
+11:55:06.604
+Android
+Warning
+ 10-31 09:54:49.570 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@11e55da 
+11:55:06.604
+Android
+Warning
+ 10-31 09:54:49.618 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@f8fefcc 
+11:55:06.604
+Android
+Warning
+ 10-31 09:54:49.697 6526 W/MediaPlayer: mediaplayer went away with unhandled events
+mediaplayer went away with unhandled events 
+11:55:06.604
+Android
+Warning
+ 10-31 09:54:50.575 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@4134d27 
+11:55:06.604
+Android
+Warning
+ 10-31 09:54:54.098 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@f945a2e 
+11:55:06.604
+Android
+Warning
+ 10-31 09:54:55.271 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@4134d27 
+11:55:06.604
+Android
+Warning
+ 10-31 09:55:00.826 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:55:06.606
+Android
+Error
+ 10-31 09:55:01.002 6526 E/MediaPlayerNative: error (1, -2147483648) 
+11:55:06.606
+Android
+Error
+ 10-31 09:55:01.202 6526 E/MediaPlayer: Error (1,-2147483648) 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:28.521 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@88cceab 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:28.568 7431 W/libpython.so: type=1400 audit(0.0:538): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:28.572 7431 W/libpython.so: type=1400 audit(0.0:539): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590917 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:28.788 7431 W/libpython.so: type=1400 audit(0.0:540): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:28.797 7431 W/audit   : audit_lost=453 audit_rate_limit=5 audit_backlog_limit=64 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:29.536 7431 W/libpython.so: type=1400 audit(0.0:575): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/site-packages/Cryptodome/Util/_cpuid_c.abi3.so" dev="dm-44" ino=590971 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:29.560 7431 W/libpython.so: type=1400 audit(0.0:576): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/site-packages/Cryptodome/Cipher/_raw_aes.abi3.so" dev="dm-44" ino=591082 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:29.576 7431 W/libpython.so: type=1400 audit(0.0:577): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/site-packages/Cryptodome/Util/_strxor.abi3.so" dev="dm-44" ino=590966 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:29.588 7431 W/libpython.so: type=1400 audit(0.0:578): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/site-packages/Cryptodome/Hash/_SHA1.abi3.so" dev="dm-44" ino=591006 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:29.624 7431 W/libpython.so: type=1400 audit(0.0:579): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/site-packages/Cryptodome/Cipher/_pkcs1_decode.abi3.so" dev="dm-44" ino=591075 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:29.848 7431 W/audit   : audit_lost=490 audit_rate_limit=5 audit_backlog_limit=64 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:30.584 7431 W/libpython.so: type=1400 audit(0.0:586): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_heapq.cpython-312.so" dev="dm-44" ino=590629 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:30.724 7431 W/libpython.so: type=1400 audit(0.0:587): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_asyncio.cpython-312.so" dev="dm-44" ino=590591 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:32.152 7442 W/uname   : type=1400 audit(0.0:591): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:592): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:55:46.497
+Android
+Warning
+ 10-31 09:55:33.644 7431 W/libpython.so: type=1400 audit(0.0:593): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_queue.cpython-312.so" dev="dm-44" ino=590618 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:56:06.508
+Android
+Warning
+ 10-31 09:55:47.022 6526 W/.streamrip.vxqk: Suspending all threads took: 6.924ms 
+11:58:46.494
+Android
+Warning
+ 10-31 09:58:39.148 8658 W/libffmpeg.so: type=1400 audit(0.0:596): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libharfbuzz.so" dev="dm-44" ino=591303 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:597): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libgmp.so" dev="dm-44" ino=591257 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:598): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libOpenCL.so" dev="dm-44" ino=591212 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:599): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libvidstab.so" dev="dm-44" ino=591258 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:600): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libwebp.so" dev="dm-44" ino=591237 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+11:58:46.494
+Android
+Warning
+ 10-31 09:58:39.161 8658 W/audit   : audit_lost=493 audit_rate_limit=5 audit_backlog_limit=64 
+11:59:06.485
+Android
+Warning
+ 10-31 09:58:55.817 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: /storage/emulated/0/Download/bbb_30fps.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:59:06.485
+Android
+Warning
+ 10-31 09:58:56.475 6526 W/MediaPlayerNative: info/warning (3, 0) 
+11:59:26.467
+Android
+Warning
+ 10-31 09:59:18.124 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@7d73d5a 
+11:59:26.467
+Android
+Warning
+ 10-31 09:59:18.161 6526 W/MediaPlayer: mediaplayer went away with unhandled events
+mediaplayer went away with unhandled events 
+11:59:46.482
+Android
+Warning
+ 10-31 09:59:28.464 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@4134d27 
+11:59:46.482
+Android
+Warning
+ 10-31 09:59:36.367 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+11:59:46.482
+Android
+Warning
+ 10-31 09:59:37.059 6526 W/MediaPlayerNative: info/warning (3, 0) 
+11:59:46.482
+Android
+Warning
+ 10-31 09:59:39.783 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@7e00d 
+11:59:46.482
+Android
+Warning
+ 10-31 09:59:39.865 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@a0fec6d 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:45.647 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://www.w3schools.com/html/mov_bbb.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:47.735 6526 W/MediaPlayerNative: info/warning (3, 0) 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:50.207 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@22eb2d0 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:50.330 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@28154a0 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:51.998 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://test-videos.co.uk/vids/sintel/mp4/h264/720/Sintel_720_10s_2MB.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:53.269 6526 W/MediaPlayerNative: info/warning (3, 0) 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:55.504 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@b0c5cf 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:55.510 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@54b5c10 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:55.592 6526 W/MediaPlayer: mediaplayer went away with unhandled events 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:58.291 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: /storage/emulated/0/Download/Sintel_0ed9a1.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+12:00:06.533
+Android
+Warning
+ 10-31 09:59:59.065 6526 W/MediaPlayerNative: info/warning (3, 0) 
+12:00:06.533
+Android
+Warning
+ 10-31 10:00:01.924 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@e625498 
+12:00:06.533
+Android
+Warning
+ 10-31 10:00:01.974 6526 W/MediaPlayer: mediaplayer went away with unhandled events
+mediaplayer went away with unhandled events 
+12:00:26.480
+Android
+Warning
+ 10-31 10:00:07.950 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@3ac326d 
+12:00:26.480
+Android
+Warning
+ 10-31 10:00:09.516 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@4134d27 
+12:00:26.480
+Android
+Warning
+ 10-31 10:00:18.480 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: https://test-streams.mux.dev/x36xhzz/url_2/193039199_mp4_h264_aac_ld_7.m3u8
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+12:00:26.480
+Android
+Warning
+ 10-31 10:00:20.227 6526 W/MediaPlayerNative: info/warning (3, 0) 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:24.987 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@46407d1 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:25.101 6526 W/MediaPlayer: mediaplayer went away with unhandled events
+mediaplayer went away with unhandled events 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:26.260 8980 W/libpython.so: type=1400 audit(0.0:754): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:755): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590917 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:26.424 8980 W/libpython.so: type=1400 audit(0.0:756): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/zlib.cpython-312.so" dev="dm-44" ino=590632 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:26.434 8980 W/audit   : audit_lost=644 audit_rate_limit=5 audit_backlog_limit=64 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:27.280 8980 W/libpython.so: type=1400 audit(0.0:799): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_opcode.cpython-312.so" dev="dm-44" ino=590573 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:27.620 8980 W/libpython.so: type=1400 audit(0.0:800): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/unicodedata.cpython-312.so" dev="dm-44" ino=590619 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:27.940 8980 W/libpython.so: type=1400 audit(0.0:801): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_contextvars.cpython-312.so" dev="dm-44" ino=590587 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:28.124 8980 W/libpython.so: type=1400 audit(0.0:802): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_heapq.cpython-312.so" dev="dm-44" ino=590629 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:28.280 8980 W/libpython.so: type=1400 audit(0.0:803): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_asyncio.cpython-312.so" dev="dm-44" ino=590591 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:29.572 8996 W/file    : type=1400 audit(0.0:805): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:806): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:29.580 8997 W/uname   : type=1400 audit(0.0:807): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:808): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:31.116 8980 W/libpython.so: type=1400 audit(0.0:809): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_queue.cpython-312.so" dev="dm-44" ino=590618 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:35.404 9209 W/libffprobe.so: type=1400 audit(0.0:810): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libvorbisenc.so" dev="dm-44" ino=591337 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:811): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libc++_shared.so" dev="dm-44" ino=590207 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:812): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-posix-semaphore.so" dev="dm-44" ino=590170 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:813): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libssh.so" dev="dm-44" ino=591241 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:814): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/liblcms2.so" dev="dm-44" ino=591190 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:815): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libxml2.so.16.0.6" dev="dm-44" ino=591172 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:816): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libgmp.so" dev="dm-44" ino=591257 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:817): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libvorbis.so" dev="dm-44" ino=591231 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:818): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libfribidi.so" dev="dm-44" ino=591340 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:35.413 9209 W/audit   : audit_lost=686 audit_rate_limit=5 audit_backlog_limit=64 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:38.759 6526 W/MediaPlayer: Error setting data source via ContentResolver
+java.io.FileNotFoundException: No content provider: /storage/emulated/0/Download/193039199_mp4_h264_aac_ld_7.mp4
+at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2029)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1858)
+at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1773)
+at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1153)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1119)
+at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1143)
+at android.widget.VideoView.openVideo(VideoView.java:412)
+at android.widget.VideoView.-$$Nest$mopenVideo(Unknown Source:0)
+at android.widget.VideoView$7.surfaceCreated(VideoView.java:694)
+at android.view.SurfaceView.updateSurface(SurfaceView.java:1240)
+at android.view.SurfaceView.lambda$new$0(SurfaceView.java:231)
+at android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU(Unknown Source:0)
+at android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw(D8$$SyntheticClass:0)
+at android.view.ViewTreeObserver.dispatchOnPreDraw(ViewTreeObserver.java:1176)
+at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4239)
+at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+at android.view.Choreographer.doFrame(Choreographer.java:945)
+at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+at android.os.Handler.handleCallback(Handler.java:959)
+at android.os.Handler.dispatchMessage(Handler.java:100)
+at android.os.Looper.loopOnce(Looper.java:232)
+at android.os.Looper.loop(Looper.java:317)
+at android.app.ActivityThread.main(ActivityThread.java:8705)
+at java.lang.reflect.Method.invoke(Native Method)
+at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886) 
+12:00:46.490
+Android
+Warning
+ 10-31 10:00:39.129 6526 W/MediaPlayerNative: info/warning (3, 0) 
+12:00:46.491
+Android
+Warning
+ 10-31 10:00:42.748 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@5125a3f 
+12:00:46.491
+Android
+Warning
+ 10-31 10:00:42.851 6526 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.widget.MediaController$$ExternalSyntheticLambda0@d04c5f3 
+12:00:46.491
+Android
+Warning
+ 10-31 10:00:42.940 6526 W/MediaPlayer: mediaplayer went away with unhandled events
+mediaplayer went away with unhandled events 

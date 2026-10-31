@@ -2,38 +2,45 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Primary Electric Cyan
-val CyanPrimaryDark = Color(0xFF00E5FF)
-val CyanOnPrimaryDark = Color(0xFF00363D)
-val CyanPrimaryContainerDark = Color(0xFF004F58)
-val CyanOnPrimaryContainerDark = Color(0xFF97F0FF)
+// Primary Electric Cobalt
+val CobaltPrimaryDark = Color(0xFF3B82F6)
+val CobaltOnPrimaryDark = Color(0xFFFFFFFF)
+val CobaltPrimaryContainerDark = Color(0xFF1E3A5F)
+val CobaltOnPrimaryContainerDark = Color(0xFFBFDBFE)
 
-val CyanPrimaryLight = Color(0xFF006874)
-val CyanOnPrimaryLight = Color(0xFFFFFFFF)
-val CyanPrimaryContainerLight = Color(0xFF97F0FF)
-val CyanOnPrimaryContainerLight = Color(0xFF001F24)
+val CobaltPrimaryLight = Color(0xFF2563EB)
+val CobaltOnPrimaryLight = Color(0xFFFFFFFF)
+val CobaltPrimaryContainerLight = Color(0xFFDBEAFE)
+val CobaltOnPrimaryContainerLight = Color(0xFF1E40AF)
 
-// Secondary Purple / Violet
-val VioletSecondaryDark = Color(0xFFCBB6FE)
-val VioletOnSecondaryDark = Color(0xFF332064)
-val VioletSecondaryContainerDark = Color(0xFF4A377C)
-val VioletOnSecondaryContainerDark = Color(0xFFE7DEFF)
+// Secondary Clean Slate / Indigo
+val IndigoSecondaryDark = Color(0xFF818CF8)
+val IndigoOnSecondaryDark = Color(0xFF1E1B4B)
+val IndigoSecondaryContainerDark = Color(0xFF2E2D5E)
+val IndigoOnSecondaryContainerDark = Color(0xFFE0E7FF)
 
-val VioletSecondaryLight = Color(0xFF625095)
-val VioletOnSecondaryLight = Color(0xFFFFFFFF)
-val VioletSecondaryContainerLight = Color(0xFFE7DEFF)
-val VioletOnSecondaryContainerLight = Color(0xFF1E0A4E)
+val IndigoSecondaryLight = Color(0xFF4F46E5)
+val IndigoOnSecondaryLight = Color(0xFFFFFFFF)
+val IndigoSecondaryContainerLight = Color(0xFFEEF2FF)
+val IndigoOnSecondaryContainerLight = Color(0xFF312E81)
 
-// Dark Surfaces
-val DarkBg = Color(0xFF12131A)
-val DarkSurface = Color(0xFF191B24)
-val DarkSurfaceVariant = Color(0xFF222533)
-val DarkOnSurface = Color(0xFFE3E4ED)
-val DarkOnSurfaceVariant = Color(0xFFC4C6D0)
+// Status Indicators
+val EmeraldSuccess = Color(0xFF10B981)
+val AmberWarning = Color(0xFFF59E0B)
+val RoseError = Color(0xFFEF4444)
 
-// Light Surfaces
-val LightBg = Color(0xFFF7F9FC)
+// Clean Dark Surfaces (Deep Neutral Obsidian)
+val DarkBg = Color(0xFF0D1117)
+val DarkSurface = Color(0xFF161B22)
+val DarkSurfaceVariant = Color(0xFF21262D)
+val DarkOnSurface = Color(0xFFF0F6FC)
+val DarkOnSurfaceVariant = Color(0xFF8B949E)
+val DarkOutline = Color(0xFF30363D)
+
+// Clean Light Surfaces
+val LightBg = Color(0xFFF6F8FA)
 val LightSurface = Color(0xFFFFFFFF)
-val LightSurfaceVariant = Color(0xFFE2E6EF)
-val LightOnSurface = Color(0xFF191B24)
-val LightOnSurfaceVariant = Color(0xFF434752)
+val LightSurfaceVariant = Color(0xFFEAEFF5)
+val LightOnSurface = Color(0xFF1F2328)
+val LightOnSurfaceVariant = Color(0xFF656D76)
+val LightOutline = Color(0xFFD0D7DE)

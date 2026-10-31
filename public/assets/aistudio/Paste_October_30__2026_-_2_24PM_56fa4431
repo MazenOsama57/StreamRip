@@ -1,0 +1,281 @@
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:37.416 6529 W/libpython.so: type=1400 audit(0.0:84): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590889 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:85): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590141 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:37.448 6529 W/libpython.so: type=1400 audit(0.0:86): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:87): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/zlib.cpython-312.so" dev="dm-44" ino=590604 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:37.492 6529 W/libpython.so: type=1400 audit(0.0:88): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/termios.cpython-312.so" dev="dm-44" ino=590579 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:37.592 6529 W/libpython.so: type=1400 audit(0.0:89): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_struct.cpython-312.so" dev="dm-44" ino=590600 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:90): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/binascii.cpython-312.so" dev="dm-44" ino=590608 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:37.601 6529 W/audit   : audit_lost=28 audit_rate_limit=5 audit_backlog_limit=64 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:38.540 6529 W/libpython.so: type=1400 audit(0.0:133): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_asyncio.cpython-312.so" dev="dm-44" ino=590563 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:39.216 6537 W/file    : type=1400 audit(0.0:135): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:136): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:39.220 6538 W/uname   : type=1400 audit(0.0:137): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:16:46.095
+Android
+Warning
+ 10-30 12:16:39.229 6538 W/audit   : audit_lost=70 audit_rate_limit=5 audit_backlog_limit=64 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:41.828 6558 W/ifconfig: type=1400 audit(0.0:141): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:142): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:41.838 6558 W/audit   : audit_lost=71 audit_rate_limit=5 audit_backlog_limit=64 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:51.140 6570 W/libpython.so: type=1400 audit(0.0:150): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590889 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:151): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590141 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:51.156 6570 W/libpython.so: type=1400 audit(0.0:152): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/zlib.cpython-312.so" dev="dm-44" ino=590604 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:153): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:51.176 6570 W/libpython.so: type=1400 audit(0.0:154): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/termios.cpython-312.so" dev="dm-44" ino=590579 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:51.232 6570 W/audit   : audit_lost=77 audit_rate_limit=5 audit_backlog_limit=64 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:52.428 6581 W/file    : type=1400 audit(0.0:200): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:201): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:06.125
+Android
+Warning
+ 10-30 12:16:55.748 6589 W/ifconfig: type=1400 audit(0.0:204): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:205): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:04.584 6615 W/libpython.so: type=1400 audit(0.0:208): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590141 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:209): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590889 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:04.596 6615 W/libpython.so: type=1400 audit(0.0:210): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/zlib.cpython-312.so" dev="dm-44" ino=590604 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:211): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:04.628 6615 W/libpython.so: type=1400 audit(0.0:212): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/termios.cpython-312.so" dev="dm-44" ino=590579 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:04.668 6615 W/libpython.so: type=1400 audit(0.0:213): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_struct.cpython-312.so" dev="dm-44" ino=590600 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:214): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/binascii.cpython-312.so" dev="dm-44" ino=590608 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:04.675 6615 W/audit   : audit_lost=122 audit_rate_limit=5 audit_backlog_limit=64 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:06.240 6621 W/file    : type=1400 audit(0.0:258): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:259): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:06.248 6622 W/uname   : type=1400 audit(0.0:260): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:261): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:26.097
+Android
+Warning
+ 10-30 12:17:10.380 6629 W/ifconfig: type=1400 audit(0.0:262): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:263): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:17:46.139
+Android
+Warning
+ 10-30 12:17:26.752 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:17:46.139
+Android
+Warning
+ 10-30 12:17:41.254 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:18:06.127
+Android
+Warning
+ 10-30 12:17:47.537 6118 W/InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=true, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.aistudio.streamrip.vxqk 
+14:18:06.127
+Android
+Warning
+ 10-30 12:17:49.896 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:18:06.127
+Android
+Warning
+ 10-30 12:17:55.731 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:18:46.116
+Android
+Warning
+ 10-30 12:18:27.985 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:19:06.093
+Android
+Warning
+ 10-30 12:18:53.258 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@469d9ef 
+14:19:06.094
+Android
+Warning
+ 10-30 12:18:56.020 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@c960736 
+14:19:06.094
+Android
+Warning
+ 10-30 12:18:58.205 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@5406195 
+14:19:06.094
+Android
+Warning
+ 10-30 12:19:00.506 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@642c91d 
+14:19:26.122
+Android
+Warning
+ 10-30 12:19:03.128 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@a8950f 
+14:19:26.122
+Android
+Warning
+ 10-30 12:19:04.759 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:19:26.122
+Android
+Warning
+ 10-30 12:19:11.618 6118 W/.streamrip.vxqk: Cleared Reference was only reachable from finalizer (only reported once) 
+14:19:26.122
+Android
+Warning
+ 10-30 12:19:16.911 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:19:46.085
+Android
+Warning
+ 10-30 12:19:21.982 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@6044b2f 
+14:19:46.085
+Android
+Warning
+ 10-30 12:19:23.005 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:20:06.134
+Android
+Warning
+ 10-30 12:19:46.017 6118 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2d2f0bd 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:04.696 7633 W/libpython.so: type=1400 audit(0.0:267): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590889 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:04.700 7633 W/libpython.so: type=1400 audit(0.0:268): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590141 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:04.716 7633 W/libpython.so: type=1400 audit(0.0:269): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/zlib.cpython-312.so" dev="dm-44" ino=590604 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:270): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:04.744 7633 W/libpython.so: type=1400 audit(0.0:271): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/termios.cpython-312.so" dev="dm-44" ino=590579 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:04.788 7633 W/libpython.so: type=1400 audit(0.0:272): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_struct.cpython-312.so" dev="dm-44" ino=590600 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:04.800 7633 W/audit   : audit_lost=165 audit_rate_limit=5 audit_backlog_limit=64 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:06.252 7641 W/file    : type=1400 audit(0.0:318): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:319): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:06.260 7642 W/uname   : type=1400 audit(0.0:320): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:321): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:10.184 7647 W/ifconfig: type=1400 audit(0.0:324): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:325): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:21:26.088
+Android
+Warning
+ 10-30 12:21:10.195 7647 W/audit   : audit_lost=209 audit_rate_limit=5 audit_backlog_limit=64 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:51.496 7759 W/libpython.so: type=1400 audit(0.0:335): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590889 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:336): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590141 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:51.516 7759 W/libpython.so: type=1400 audit(0.0:337): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:51.524 7759 W/audit   : audit_lost=215 audit_rate_limit=5 audit_backlog_limit=64 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:53.176 7767 W/file    : type=1400 audit(0.0:386): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:387): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:53.184 7768 W/uname   : type=1400 audit(0.0:388): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:389): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:56.488 7775 W/ifconfig: type=1400 audit(0.0:392): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:393): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:06.091
+Android
+Warning
+ 10-30 12:21:56.499 7775 W/audit   : audit_lost=262 audit_rate_limit=5 audit_backlog_limit=64 
+14:22:46.287
+Android
+Warning
+ 10-30 12:22:28.120 7887 W/libpython.so: type=1400 audit(0.0:403): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590141 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:404): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590889 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:46.287
+Android
+Warning
+ 10-30 12:22:28.136 7887 W/libpython.so: type=1400 audit(0.0:405): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:46.287
+Android
+Warning
+ 10-30 12:22:28.143 7887 W/audit   : audit_lost=268 audit_rate_limit=5 audit_backlog_limit=64 
+14:22:46.287
+Android
+Warning
+ 10-30 12:22:33.140 7899 W/ifconfig: type=1400 audit(0.0:460): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590895 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:461): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590146 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+14:22:46.287
+Android
+Warning
+ 10-30 12:22:33.151 7899 W/audit   : audit_lost=315 audit_rate_limit=5 audit_backlog_limit=64 

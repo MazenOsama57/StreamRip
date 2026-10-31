@@ -1,6 +1,7 @@
 package com.example.ui.screens
 
 import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -47,17 +48,37 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.border
+import com.example.ui.theme.EmeraldSuccess
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -84,11 +105,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.example.data.model.DiscoveredMediaCandidate
 import com.example.data.model.DownloadedFile
 import com.example.data.model.DownloadStatus
 import com.example.data.model.MediaMetadata
 import com.example.data.model.MediaType
+import com.example.data.model.SourceProtocol
 import com.example.ui.components.SettingsDialog
+import com.example.ui.components.VideoPreviewDialog
 import com.example.ui.components.YouTubeLoginDialog
 import com.example.ui.viewmodel.AppTab
 import com.example.ui.viewmodel.MainUiState
@@ -104,6 +128,10 @@ fun HomeScreen(
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
     val snackbarHostState = remember { SnackbarHostState() }
+
+    BackHandler(enabled = uiState.activeTab == AppTab.LIBRARY) {
+        viewModel.setTab(AppTab.DOWNLOAD)
+    }
 
     LaunchedEffect(uiState.userMessage) {
         uiState.userMessage?.let {
@@ -137,6 +165,24 @@ fun HomeScreen(
         )
     }
 
+    if (uiState.previewState.isOpen) {
+        VideoPreviewDialog(
+            title = uiState.previewState.title,
+            mediaUrlOrPath = uiState.previewState.mediaUrlOrPath,
+            candidate = uiState.previewState.candidate,
+            isLocalFile = uiState.previewState.isLocalFile,
+            onDownloadCandidate = { candidate ->
+                viewModel.downloadCandidate(candidate)
+            },
+            onShareFile = {
+                uiState.downloads.firstOrNull { it.file.absolutePath == uiState.previewState.mediaUrlOrPath }?.let { item ->
+                    viewModel.shareMediaFile(context, item.file, item.type)
+                }
+            },
+            onDismiss = viewModel::closePreview
+        )
+    }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
@@ -147,42 +193,58 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Surface(
-                            shape = CircleShape,
+                            shape = RoundedCornerShape(10.dp),
                             color = MaterialTheme.colorScheme.primaryContainer,
-                            modifier = Modifier.size(38.dp)
+                            modifier = Modifier.size(36.dp)
                         ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(
-                                        brush = Brush.linearGradient(
-                                            colors = listOf(
-                                                MaterialTheme.colorScheme.primary,
-                                                MaterialTheme.colorScheme.tertiary
-                                            )
-                                        )
-                                    )
-                            ) {
+                            Box(contentAlignment = Alignment.Center) {
                                 Icon(
                                     imageVector = Icons.Default.Download,
                                     contentDescription = "StreamRip",
-                                    tint = Color.White,
+                                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                     modifier = Modifier.size(20.dp)
                                 )
                             }
                         }
                         Column {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Text(
+                                    text = "StreamRip",
+                                    style = MaterialTheme.typography.titleMedium.copy(
+                                        fontWeight = FontWeight.Bold,
+                                        letterSpacing = (-0.3).sp
+                                    ),
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Surface(
+                                    shape = RoundedCornerShape(8.dp),
+                                    color = MaterialTheme.colorScheme.surfaceVariant
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .size(6.dp)
+                                                .clip(CircleShape)
+                                                .background(EmeraldSuccess)
+                                        )
+                                        Text(
+                                            text = uiState.engineVersion ?: "Ready",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.Medium,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
+                            }
                             Text(
-                                text = "StreamRip",
-                                style = MaterialTheme.typography.titleLarge.copy(
-                                    fontWeight = FontWeight.Bold,
-                                    letterSpacing = 0.5.sp
-                                ),
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            Text(
-                                text = "Universal Media Downloader",
+                                text = "Universal Stream & Media Downloader",
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -190,7 +252,25 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    // Settings icon containing YT-DLP Core info, updates, and YouTube authentication
+                    if (uiState.hasActiveCookies) {
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                            modifier = Modifier.padding(end = 4.dp)
+                        ) {
+                            IconButton(
+                                onClick = { viewModel.openCookieDialog() },
+                                modifier = Modifier.size(36.dp).testTag("cookie_status_button")
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.VpnKey,
+                                    contentDescription = "Active Cookies",
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
+                        }
+                    }
                     IconButton(
                         onClick = { viewModel.openSettingsDialog() },
                         modifier = Modifier.testTag("settings_button")
@@ -207,83 +287,135 @@ fun HomeScreen(
                 )
             )
         },
+        bottomBar = {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surface,
+                tonalElevation = 6.dp
+            ) {
+                NavigationBarItem(
+                    selected = uiState.activeTab == AppTab.DOWNLOAD,
+                    onClick = { viewModel.setTab(AppTab.DOWNLOAD) },
+                    icon = { Icon(Icons.Default.Download, contentDescription = "Downloader") },
+                    label = { Text("Downloader") },
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedTextColor = MaterialTheme.colorScheme.primary
+                    ),
+                    modifier = Modifier.testTag("nav_downloader")
+                )
+                NavigationBarItem(
+                    selected = uiState.activeTab == AppTab.LIBRARY,
+                    onClick = { viewModel.setTab(AppTab.LIBRARY) },
+                    icon = {
+                        BadgedBox(
+                            badge = {
+                                if (uiState.downloads.isNotEmpty()) {
+                                    Badge(
+                                        containerColor = MaterialTheme.colorScheme.primary,
+                                        contentColor = MaterialTheme.colorScheme.onPrimary
+                                    ) {
+                                        Text("${uiState.downloads.size}")
+                                    }
+                                }
+                            }
+                        ) {
+                            Icon(Icons.Default.Folder, contentDescription = "Downloads")
+                        }
+                    },
+                    label = { Text("Downloads") },
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedTextColor = MaterialTheme.colorScheme.primary
+                    ),
+                    modifier = Modifier.testTag("nav_library")
+                )
+            }
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { innerPadding ->
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            PrimaryTabRow(
-                selectedTabIndex = if (uiState.activeTab == AppTab.DOWNLOAD) 0 else 1,
-                containerColor = MaterialTheme.colorScheme.surface
-            ) {
-                Tab(
-                    selected = uiState.activeTab == AppTab.DOWNLOAD,
-                    onClick = { viewModel.setTab(AppTab.DOWNLOAD) },
-                    text = { Text("Downloader") },
-                    icon = { Icon(Icons.Default.Download, contentDescription = "Downloader") },
-                    modifier = Modifier.testTag("tab_downloader")
-                )
-                Tab(
-                    selected = uiState.activeTab == AppTab.LIBRARY,
-                    onClick = { viewModel.setTab(AppTab.LIBRARY) },
-                    text = {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Text("Library")
-                            if (uiState.downloads.isNotEmpty()) {
-                                Badge(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                                ) {
-                                    Text("${uiState.downloads.size}")
+            AnimatedContent(
+                targetState = uiState.activeTab,
+                transitionSpec = {
+                    if (targetState.ordinal > initialState.ordinal) {
+                        (slideInHorizontally { width -> width / 3 } + fadeIn()).togetherWith(
+                            slideOutHorizontally { width -> -width / 3 } + fadeOut()
+                        )
+                    } else {
+                        (slideInHorizontally { width -> -width / 3 } + fadeIn()).togetherWith(
+                            slideOutHorizontally { width -> width / 3 } + fadeOut()
+                        )
+                    }.using(SizeTransform(clip = false))
+                },
+                label = "tab_animation"
+            ) { tab ->
+                when (tab) {
+                    AppTab.DOWNLOAD -> {
+                        DownloaderContent(
+                            uiState = uiState,
+                            onUrlChanged = viewModel::onUrlChanged,
+                            onPaste = {
+                                val clipboardText = clipboardManager.getText()?.text
+                                if (!clipboardText.isNullOrBlank()) {
+                                    viewModel.onUrlChanged(clipboardText)
+                                    viewModel.fetchMetadata()
                                 }
-                            }
-                        }
-                    },
-                    icon = { Icon(Icons.Default.Folder, contentDescription = "Library") },
-                    modifier = Modifier.testTag("tab_library")
-                )
-            }
-
-            when (uiState.activeTab) {
-                AppTab.DOWNLOAD -> {
-                    DownloaderContent(
-                        uiState = uiState,
-                        onUrlChanged = viewModel::onUrlChanged,
-                        onPaste = {
-                            val clipboardText = clipboardManager.getText()?.text
-                            if (!clipboardText.isNullOrBlank()) {
-                                viewModel.onUrlChanged(clipboardText)
-                                viewModel.fetchMetadata()
-                            }
-                        },
-                        onClearUrl = { viewModel.onUrlChanged("") },
-                        onSelectType = viewModel::onSelectMediaType,
-                        onSelectVideoQuality = viewModel::onSelectVideoQuality,
-                        onSelectAudioQuality = viewModel::onSelectAudioQuality,
-                        onFetchInfo = viewModel::fetchMetadata,
-                        onStartDownload = viewModel::startDownload,
-                        onCancelDownload = viewModel::cancelDownload,
-                        onOpenSettings = viewModel::openSettingsDialog,
-                        onOpenCookieDialog = viewModel::openCookieDialog,
-                        onOpenMedia = { file, type -> viewModel.openMediaFile(context, file, type) },
-                        onShareMedia = { file, type -> viewModel.shareMediaFile(context, file, type) },
-                        onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) }
-                    )
-                }
-                AppTab.LIBRARY -> {
-                    LibraryContent(
-                        downloads = uiState.downloads,
-                        onRefresh = viewModel::refreshDownloads,
-                        onOpenMedia = { file, type -> viewModel.openMediaFile(context, file, type) },
-                        onShareMedia = { file, type -> viewModel.shareMediaFile(context, file, type) },
-                        onDeleteFile = viewModel::deleteDownloadedFile,
-                        onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) }
-                    )
+                            },
+                            onClearUrl = { viewModel.onUrlChanged("") },
+                            onSelectType = viewModel::onSelectMediaType,
+                            onSelectVideoQuality = viewModel::onSelectVideoQuality,
+                            onSelectAudioQuality = viewModel::onSelectAudioQuality,
+                            onSelectCandidate = viewModel::onSelectCandidate,
+                            onPreviewCandidate = viewModel::openPreview,
+                            onDownloadCandidate = viewModel::downloadCandidate,
+                            onFetchInfo = viewModel::fetchMetadata,
+                            onStartDownload = viewModel::startDownload,
+                            onCancelDownload = viewModel::cancelDownload,
+                            onOpenSettings = viewModel::openSettingsDialog,
+                            onOpenCookieDialog = viewModel::openCookieDialog,
+                            onOpenMedia = { file, type ->
+                                viewModel.openLocalFilePreview(
+                                    DownloadedFile(
+                                        id = file.absolutePath,
+                                        title = file.nameWithoutExtension,
+                                        file = file,
+                                        type = type,
+                                        sizeBytes = file.length(),
+                                        timestamp = file.lastModified()
+                                    )
+                                )
+                            },
+                            onShareMedia = { file, type -> viewModel.shareMediaFile(context, file, type) },
+                            onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) }
+                        )
+                    }
+                    AppTab.LIBRARY -> {
+                        LibraryContent(
+                            downloads = uiState.downloads,
+                            onRefresh = viewModel::refreshDownloads,
+                            onOpenMedia = { file, type ->
+                                viewModel.openLocalFilePreview(
+                                    DownloadedFile(
+                                        id = file.absolutePath,
+                                        title = file.nameWithoutExtension,
+                                        file = file,
+                                        type = type,
+                                        sizeBytes = file.length(),
+                                        timestamp = file.lastModified()
+                                    )
+                                )
+                            },
+                            onShareMedia = { file, type -> viewModel.shareMediaFile(context, file, type) },
+                            onDeleteFile = viewModel::deleteDownloadedFile,
+                            onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) }
+                        )
+                    }
                 }
             }
         }
@@ -299,6 +431,9 @@ private fun DownloaderContent(
     onSelectType: (MediaType) -> Unit,
     onSelectVideoQuality: (String) -> Unit,
     onSelectAudioQuality: (String) -> Unit,
+    onSelectCandidate: (DiscoveredMediaCandidate) -> Unit = {},
+    onPreviewCandidate: (DiscoveredMediaCandidate) -> Unit = {},
+    onDownloadCandidate: (DiscoveredMediaCandidate) -> Unit = {},
     onFetchInfo: () -> Unit,
     onStartDownload: () -> Unit,
     onCancelDownload: () -> Unit,
@@ -317,20 +452,26 @@ private fun DownloaderContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
+                    containerColor = MaterialTheme.colorScheme.surface
                 ),
-                shape = RoundedCornerShape(18.dp),
-                modifier = Modifier.fillMaxWidth()
+                shape = RoundedCornerShape(16.dp),
+                border = androidx.compose.foundation.BorderStroke(
+                    1.dp,
+                    MaterialTheme.colorScheme.outlineVariant
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("url_input_card")
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
-                        text = "Media URL",
+                        text = "Media Source URL",
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurface
@@ -342,7 +483,7 @@ private fun DownloaderContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("url_input_field"),
-                        placeholder = { Text("Paste video or audio URL...") },
+                        placeholder = { Text("Paste video, audio, or HLS stream link...") },
                         leadingIcon = {
                             Icon(Icons.Default.Link, contentDescription = "URL Link")
                         },
@@ -372,10 +513,99 @@ private fun DownloaderContent(
                         )
                     )
 
+                    // Quick demo links for testing protocols
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        item {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                onClick = {
+                                    onUrlChanged("https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4")
+                                    onFetchInfo()
+                                },
+                                modifier = Modifier.height(30.dp).testTag("demo_mp4_chip")
+                            ) {
+                                Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                    Text("Direct MP4", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                            }
+                        }
+
+                        item {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                onClick = {
+                                    onUrlChanged("https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8")
+                                    onFetchInfo()
+                                },
+                                modifier = Modifier.height(30.dp).testTag("demo_hls_chip")
+                            ) {
+                                Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                    Text("HLS (.m3u8)", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                            }
+                        }
+
+                        item {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                onClick = {
+                                    onUrlChanged("https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd")
+                                    onFetchInfo()
+                                },
+                                modifier = Modifier.height(30.dp).testTag("demo_dash_chip")
+                            ) {
+                                Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                    Text("DASH (.mpd)", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                            }
+                        }
+
+                        item {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                onClick = {
+                                    onUrlChanged("https://player.castbuddy.app/help/sample")
+                                    onFetchInfo()
+                                },
+                                modifier = Modifier.height(30.dp).testTag("demo_html5_chip")
+                            ) {
+                                Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                    Text("HTML5 Webpage", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                            }
+                        }
+
+                        item {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                onClick = {
+                                    onUrlChanged("https://raw.githubusercontent.com/cdnbye/hlsjs-p2p-engine/master/demo/playerjs/index.html")
+                                    onFetchInfo()
+                                },
+                                modifier = Modifier.height(30.dp).testTag("demo_playerjs_chip")
+                            ) {
+                                Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                    Text("PlayerJS", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                }
+                            }
+                        }
+                    }
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+
                         OutlinedButton(
                             onClick = onFetchInfo,
                             enabled = uiState.url.isNotBlank() && !isDownloading && uiState.status !is DownloadStatus.FetchingInfo,
@@ -384,19 +614,19 @@ private fun DownloaderContent(
                         ) {
                             if (uiState.status is DownloadStatus.FetchingInfo) {
                                 CircularProgressIndicator(
-                                    modifier = Modifier.size(16.dp),
+                                    modifier = Modifier.size(14.dp),
                                     strokeWidth = 2.dp
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
                                 Text("Analyzing...")
                             } else {
                                 Icon(
                                     Icons.Default.Search,
                                     contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
+                                    modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Fetch Preview")
+                                Text("Analyze")
                             }
                         }
                     }
@@ -509,7 +739,29 @@ private fun DownloaderContent(
 
         if (previewMeta != null) {
             item {
-                MediaPreviewCard(metadata = previewMeta)
+                MediaPreviewCard(
+                    metadata = previewMeta,
+                    selectedCandidateId = uiState.selectedCandidateId,
+                    onSelectCandidate = onSelectCandidate,
+                    onPreviewStream = {
+                        val active = previewMeta.selectedCandidate
+                        if (active != null) {
+                            onPreviewCandidate(active)
+                        }
+                    }
+                )
+            }
+
+            if (previewMeta.candidates.size > 1) {
+                item {
+                    MultipleCandidatesCard(
+                        candidates = previewMeta.candidates,
+                        selectedCandidateId = uiState.selectedCandidateId,
+                        onSelectCandidate = onSelectCandidate,
+                        onPreviewCandidate = onPreviewCandidate,
+                        onDownloadCandidate = onDownloadCandidate
+                    )
+                }
             }
         }
 
@@ -659,7 +911,12 @@ private fun FormatChoiceCard(
 }
 
 @Composable
-private fun MediaPreviewCard(metadata: MediaMetadata) {
+private fun MediaPreviewCard(
+    metadata: MediaMetadata,
+    selectedCandidateId: String? = null,
+    onSelectCandidate: (DiscoveredMediaCandidate) -> Unit = {},
+    onPreviewStream: (() -> Unit)? = null
+) {
     Card(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -702,18 +959,300 @@ private fun MediaPreviewCard(metadata: MediaMetadata) {
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(
-                    text = metadata.title,
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = metadata.title,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false)
+                    )
+
+                    val protocol = metadata.sourceProtocol ?: metadata.selectedCandidate?.protocol
+                    if (protocol != null) {
+                        Surface(
+                            shape = RoundedCornerShape(6.dp),
+                            color = when (protocol) {
+                                SourceProtocol.HLS -> MaterialTheme.colorScheme.tertiaryContainer
+                                SourceProtocol.DASH -> MaterialTheme.colorScheme.secondaryContainer
+                                SourceProtocol.PLAYERJS -> MaterialTheme.colorScheme.primaryContainer
+                                SourceProtocol.HTML5_TAG -> MaterialTheme.colorScheme.surfaceVariant
+                                SourceProtocol.DIRECT_HTTP -> MaterialTheme.colorScheme.primaryContainer
+                            },
+                            modifier = Modifier.padding(start = 8.dp)
+                        ) {
+                            Text(
+                                text = protocol.displayName,
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = when (protocol) {
+                                    SourceProtocol.HLS -> MaterialTheme.colorScheme.onTertiaryContainer
+                                    SourceProtocol.DASH -> MaterialTheme.colorScheme.onSecondaryContainer
+                                    SourceProtocol.PLAYERJS -> MaterialTheme.colorScheme.onPrimaryContainer
+                                    SourceProtocol.HTML5_TAG -> MaterialTheme.colorScheme.onSurfaceVariant
+                                    SourceProtocol.DIRECT_HTTP -> MaterialTheme.colorScheme.onPrimaryContainer
+                                },
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                            )
+                        }
+                    }
+                }
+
                 metadata.uploader?.let { uploader ->
                     Text(
                         text = uploader,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                }
+
+                onPreviewStream?.let { previewAction ->
+                    Spacer(modifier = Modifier.height(6.dp))
+                    OutlinedButton(
+                        onClick = previewAction,
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.testTag("preview_stream_button")
+                    ) {
+                        Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("Preview Video in App", style = MaterialTheme.typography.labelLarge)
+                    }
+                }
+            }
+
+            // Discovered streams and candidate selection list
+            if (metadata.candidates.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "Discovered Streams & Qualities (${metadata.candidates.size})",
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                val effectiveSelectedId = selectedCandidateId ?: metadata.selectedCandidateId ?: metadata.candidates.firstOrNull()?.id
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(metadata.candidates) { candidate ->
+                        val isSelected = candidate.id == effectiveSelectedId
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = { onSelectCandidate(candidate) },
+                            label = {
+                                Column(modifier = Modifier.padding(vertical = 2.dp)) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                    ) {
+                                        Text(
+                                            text = candidate.label,
+                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                        )
+                                        if (candidate.protocol != SourceProtocol.DIRECT_HTTP) {
+                                            Text(
+                                                text = "• ${candidate.protocol.displayName}",
+                                                style = MaterialTheme.typography.labelSmall,
+                                                color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+                                    }
+                                    candidate.formattedSize?.let { sizeStr ->
+                                        Text(
+                                            text = sizeStr,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f) else MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
+                            },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                                selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            ),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MultipleCandidatesCard(
+    candidates: List<DiscoveredMediaCandidate>,
+    selectedCandidateId: String?,
+    onSelectCandidate: (DiscoveredMediaCandidate) -> Unit,
+    onPreviewCandidate: (DiscoveredMediaCandidate) -> Unit,
+    onDownloadCandidate: (DiscoveredMediaCandidate) -> Unit
+) {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("multiple_candidates_card")
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Videocam,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(20.dp)
+                )
+                Text(
+                    text = "Discovered Videos on this Page (${candidates.size})",
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            Text(
+                text = "Choose any video below to preview in the player or download directly:",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            val effectiveSelectedId = selectedCandidateId ?: candidates.firstOrNull()?.id
+
+            candidates.forEachIndexed { index, candidate ->
+                val isSelected = candidate.id == effectiveSelectedId
+                Card(
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = if (isSelected) {
+                            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f)
+                        } else {
+                            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
+                        }
+                    ),
+                    border = if (isSelected) {
+                        androidx.compose.foundation.BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary)
+                    } else null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onSelectCandidate(candidate) }
+                        .testTag("candidate_card_$index")
+                ) {
+                    Column(
+                        modifier = Modifier.padding(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            if (!candidate.thumbnailUrl.isNullOrBlank()) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(68.dp, 48.dp)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                                ) {
+                                    AsyncImage(
+                                        model = candidate.thumbnailUrl,
+                                        contentDescription = candidate.label,
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
+                            } else {
+                                Surface(
+                                    shape = RoundedCornerShape(8.dp),
+                                    color = MaterialTheme.colorScheme.primaryContainer,
+                                    modifier = Modifier.size(44.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Default.PlayArrow,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.size(22.dp)
+                                        )
+                                    }
+                                }
+                            }
+
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = candidate.label,
+                                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                ) {
+                                    Surface(
+                                        shape = RoundedCornerShape(4.dp),
+                                        color = MaterialTheme.colorScheme.secondaryContainer
+                                    ) {
+                                        Text(
+                                            text = candidate.protocol.displayName,
+                                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp)
+                                        )
+                                    }
+                                    candidate.resolution?.let { res ->
+                                        Text(
+                                            text = res,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                    candidate.formattedSize?.let { sz ->
+                                        Text(
+                                            text = "• $sz",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            OutlinedButton(
+                                onClick = { onPreviewCandidate(candidate) },
+                                shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.testTag("preview_candidate_$index")
+                            ) {
+                                Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(14.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Preview", style = MaterialTheme.typography.labelMedium)
+                            }
+
+                            Button(
+                                onClick = { onDownloadCandidate(candidate) },
+                                shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.testTag("download_candidate_$index")
+                            ) {
+                                Icon(Icons.Default.Download, contentDescription = null, modifier = Modifier.size(14.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Download", style = MaterialTheme.typography.labelMedium)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -887,40 +1426,49 @@ private fun DownloadCompletedCard(
                 }
             }
 
+            Button(
+                onClick = onPlay,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .testTag("play_completed_button"),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(20.dp))
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = if (status.type == MediaType.VIDEO_MP4) "Play Video in App" else "Play Music in App",
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    maxLines = 1
+                )
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Button(
-                    onClick = onPlay,
-                    modifier = Modifier
-                        .weight(1f)
-                        .testTag("play_completed_button"),
-                    shape = RoundedCornerShape(10.dp)
-                ) {
-                    Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(if (status.type == MediaType.VIDEO_MP4) "Play Video" else "Play Music")
-                }
-
                 OutlinedButton(
                     onClick = onShare,
-                    modifier = Modifier.testTag("share_completed_button"),
-                    shape = RoundedCornerShape(10.dp)
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag("share_completed_button"),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text("Share")
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Share", maxLines = 1)
                 }
 
                 OutlinedButton(
                     onClick = onOpenDownloadsFolder,
-                    modifier = Modifier.testTag("open_folder_completed_button"),
-                    shape = RoundedCornerShape(10.dp)
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag("open_folder_completed_button"),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Icon(Icons.Default.Folder, contentDescription = null, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text("Downloads")
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Open Folder", maxLines = 1)
                 }
             }
         }
@@ -959,7 +1507,7 @@ private fun DownloadFailedCard(
                     modifier = Modifier.size(26.dp)
                 )
                 Text(
-                    text = if (requiresVerification) "Bot Verification Required" else "Download Failed",
+                    text = if (requiresVerification) "Stream Blocked (HTTP 403 / Bot Check)" else "Download Failed",
                     style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.error
                 )
@@ -977,6 +1525,16 @@ private fun DownloadFailedCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (requiresVerification) {
+                    OutlinedButton(
+                        onClick = onOpenSettings,
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.testTag("open_settings_from_error_button")
+                    ) {
+                        Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Update Core")
+                    }
+
                     Button(
                         onClick = onOpenCookieDialog,
                         colors = ButtonDefaults.buttonColors(
@@ -988,7 +1546,19 @@ private fun DownloadFailedCard(
                     ) {
                         Icon(Icons.Default.VpnKey, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Sign In or Add Cookies")
+                        Text("Add Cookies / Login")
+                    }
+
+                    Button(
+                        onClick = onRetry,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.testTag("retry_button")
+                    ) {
+                        Text("Retry")
                     }
                 } else {
                     OutlinedButton(
