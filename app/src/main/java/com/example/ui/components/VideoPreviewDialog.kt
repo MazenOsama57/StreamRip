@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.OptIn
 import com.example.R
+import com.example.data.DownloadLogger
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.compose.foundation.background
@@ -91,6 +92,13 @@ fun VideoPreviewDialog(
 
         ExoPlayer.Builder(context).build().apply {
             setAudioAttributes(audioAttributes, true)
+            // Constrain in-app preview to 720p/30fps to avoid decoder capability overload on DASH streams in emulator and devices
+            trackSelectionParameters = trackSelectionParameters
+                .buildUpon()
+                .setMaxVideoSize(1280, 720)
+                .setMaxVideoFrameRate(30)
+                .build()
+
             playWhenReady = true
             repeatMode = Player.REPEAT_MODE_ONE
 
@@ -122,15 +130,27 @@ fun VideoPreviewDialog(
             addListener(object : Player.Listener {
                 override fun onPlaybackStateChanged(state: Int) {
                     isBuffering = state == Player.STATE_BUFFERING
+                    DownloadLogger.d("VideoPreview", "Playback state changed: $state (buffering=$isBuffering)")
                 }
 
                 override fun onPlayerError(error: PlaybackException) {
                     isBuffering = false
+                    DownloadLogger.e("VideoPreview", "ExoPlayer error ${error.errorCodeName} (${error.errorCode})", error)
                     playbackError = "Playback error (${error.errorCodeName}). The host stream may require authentication or conversion. You can download the full video below."
                 }
             })
         }
     }
+
+    val safeDismiss: () -> Unit = {
+        try {
+            exoPlayer.pause()
+            exoPlayer.setVideoSurface(null)
+        } catch (_: Exception) {}
+        onDismiss()
+    }
+
+    androidx.activity.compose.BackHandler(onBack = safeDismiss)
 
     DisposableEffect(exoPlayer) {
         onDispose {
@@ -138,7 +158,7 @@ fun VideoPreviewDialog(
                 // Detach surface first to prevent MediaCodec handler errors on destroyed threads
                 playerViewRef?.player = null
                 playerViewRef = null
-                exoPlayer.clearVideoSurface()
+                exoPlayer.setVideoSurface(null)
                 exoPlayer.stop()
                 exoPlayer.clearMediaItems()
                 exoPlayer.release()
@@ -193,7 +213,7 @@ fun VideoPreviewDialog(
                     }
 
                     IconButton(
-                        onClick = onDismiss,
+                        onClick = safeDismiss,
                         modifier = Modifier.testTag("close_preview_button")
                     ) {
                         Icon(
@@ -334,7 +354,7 @@ fun VideoPreviewDialog(
                     if (candidate != null && onDownloadCandidate != null) {
                         Button(
                             onClick = {
-                                onDismiss()
+                                safeDismiss()
                                 onDownloadCandidate(candidate)
                             },
                             shape = RoundedCornerShape(12.dp),
@@ -346,7 +366,7 @@ fun VideoPreviewDialog(
                         }
                     } else {
                         Button(
-                            onClick = onDismiss,
+                            onClick = safeDismiss,
                             shape = RoundedCornerShape(12.dp)
                         ) {
                             Text("Close")

@@ -61,6 +61,11 @@ class DirectMediaDownloader(
         val targetUrl = candidate?.url?.takeIf { it.isNotBlank() } ?: url
         Log.i(TAG, "Initiating direct media download for $targetUrl [processId=$processId, type=$type]")
 
+        val reqHeaders = mutableMapOf<String, String>()
+        reqHeaders["User-Agent"] = BROWSER_USER_AGENT
+        reqHeaders["Accept"] = "*/*"
+        reqHeaders["Accept-Encoding"] = "identity"
+
         val reqBuilder = Request.Builder()
             .url(targetUrl)
             .get()
@@ -72,13 +77,17 @@ class DirectMediaDownloader(
         candidate?.requiredHeaders?.forEach { (headerName, headerValue) ->
             if (headerName.isNotBlank() && headerValue.isNotBlank()) {
                 reqBuilder.header(headerName, headerValue)
+                reqHeaders[headerName] = headerValue
             }
         }
 
         // Default Referer to parent page if not provided
         if (candidate?.requiredHeaders?.containsKey("Referer") != true && !candidate?.parentPageUrl.isNullOrBlank()) {
             reqBuilder.header("Referer", candidate!!.parentPageUrl)
+            reqHeaders["Referer"] = candidate.parentPageUrl
         }
+
+        DownloadLogger.logRequest(TAG, targetUrl, "GET", reqHeaders)
 
         val call = okHttpClient.newCall(reqBuilder.build())
         activeCalls[processId] = call
@@ -87,18 +96,26 @@ class DirectMediaDownloader(
 
         try {
             val response = call.execute()
+            val respHeaders = response.headers.toMultimap().mapValues { it.value.joinToString(", ") }
+            val code = response.code
+            val msg = response.message
+
+            DownloadLogger.logResponse(TAG, targetUrl, code, respHeaders, "Content-Length: ${response.header("Content-Length") ?: "unknown"}")
+
             if (!response.isSuccessful) {
-                val code = response.code
-                val msg = response.message
+                DownloadLogger.e(TAG, "HTTP $code $msg for $targetUrl", headers = respHeaders, responseCode = code, url = targetUrl)
                 response.close()
                 return@withContext Result.failure(
                     Exception("HTTP $code $msg from media server. [Engine: DirectMediaDownloader]")
                 )
             }
 
-            val body = response.body ?: return@withContext Result.failure(
-                Exception("Empty response received from media server. [Engine: DirectMediaDownloader]")
-            )
+            val body = response.body ?: run {
+                DownloadLogger.e(TAG, "Empty body response for $targetUrl", responseCode = code, url = targetUrl)
+                return@withContext Result.failure(
+                    Exception("Empty response received from media server. [Engine: DirectMediaDownloader]")
+                )
+            }
 
             val contentLength = body.contentLength()
             val contentType = response.header("Content-Type")?.lowercase() ?: ""
@@ -199,9 +216,11 @@ class DirectMediaDownloader(
         } catch (e: Exception) {
             tempStagingFile?.delete()
             if (e is CancellationException || call.isCanceled()) {
+                DownloadLogger.w(TAG, "Direct download was cancelled by user.")
                 Log.i(TAG, "Direct download was cancelled by user.")
                 return@withContext Result.failure(Exception("Download cancelled"))
             }
+            DownloadLogger.e(TAG, "Direct download encountered an exception: ${e.message}", e)
             Log.e(TAG, "Direct download encountered an exception: ${e.message}", e)
             Result.failure(Exception("Direct download failed: ${e.message ?: "Network error"} [Engine: DirectMediaDownloader]"))
         } finally {

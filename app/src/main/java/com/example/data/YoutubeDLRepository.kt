@@ -39,6 +39,93 @@ class YoutubeDLRepository(private val context: Context) {
             return dir
         }
 
+    companion object {
+        const val PREFS_NAME = "streamrip_settings"
+        const val KEY_DOWNLOAD_DIR_TYPE = "download_dir_type"
+
+        const val DIR_TYPE_STANDARD = "standard" // /Download
+        const val DIR_TYPE_STREAMRIP = "streamrip" // /Download/StreamRip
+        const val DIR_TYPE_APP_STORAGE = "app_storage" // App internal media storage
+    }
+
+    private val prefs by lazy {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    }
+
+    var downloadDirType: String
+        get() = prefs.getString(KEY_DOWNLOAD_DIR_TYPE, DIR_TYPE_STREAMRIP) ?: DIR_TYPE_STREAMRIP
+        set(value) = prefs.edit().putString(KEY_DOWNLOAD_DIR_TYPE, value).apply()
+
+    fun getDownloadDirectoryName(): String {
+        return when (downloadDirType) {
+            DIR_TYPE_STREAMRIP -> "Dedicated /Download/StreamRip"
+            DIR_TYPE_APP_STORAGE -> "App Internal Media Storage"
+            else -> "Standard /Download"
+        }
+    }
+
+    fun getTargetDownloadDirectory(): File {
+        return when (downloadDirType) {
+            DIR_TYPE_STREAMRIP -> {
+                val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "StreamRip")
+                if (!dir.exists()) dir.mkdirs()
+                dir
+            }
+            DIR_TYPE_APP_STORAGE -> {
+                val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
+                if (!dir.exists()) dir.mkdirs()
+                dir
+            }
+            else -> publicDownloadsDir
+        }
+    }
+
+    fun getTempCacheSizeBytes(): Long {
+        var size = 0L
+        fun addDir(f: File) {
+            if (!f.exists()) return
+            f.listFiles()?.forEach { file ->
+                if (file.isDirectory) {
+                    addDir(file)
+                } else {
+                    size += file.length()
+                }
+            }
+        }
+        addDir(stagingDir)
+        context.cacheDir.listFiles()?.forEach { f ->
+            if (f.name != "streamrip_staging") {
+                if (f.isDirectory) addDir(f) else size += f.length()
+            }
+        }
+        return size
+    }
+
+    fun clearCachedTempFiles(): Long {
+        var cleared = 0L
+        fun cleanDir(f: File) {
+            if (!f.exists()) return
+            f.listFiles()?.forEach { file ->
+                if (file.isDirectory) {
+                    cleanDir(file)
+                    try { file.delete() } catch (_: Exception) {}
+                } else {
+                    cleared += file.length()
+                    try { file.delete() } catch (_: Exception) {}
+                }
+            }
+        }
+        cleanDir(stagingDir)
+        context.cacheDir.listFiles()?.forEach { f ->
+            if (f.name.startsWith("tmp") || f.name.endsWith(".tmp") || f.name.endsWith(".part") || f.name.endsWith(".ytdl")) {
+                cleared += f.length()
+                try { f.delete() } catch (_: Exception) {}
+            }
+        }
+        DownloadLogger.i("YoutubeDLRepo", "Cleared temp files: ${cleared / (1024 * 1024)} MB")
+        return cleared
+    }
+
     // Public system Downloads folder (/storage/emulated/0/Download)
     val publicDownloadsDir: File
         get() = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -448,13 +535,17 @@ class YoutubeDLRepository(private val context: Context) {
             }
         }
 
+        DownloadLogger.logRequest("YoutubeDL", url, "EXECUTE", candidate?.requiredHeaders)
+
         val response = YoutubeDL.getInstance().execute(
             request = request,
             processId = processId
         ) { progress, eta, line ->
+            DownloadLogger.logProcessLine("YoutubeDL", line)
             onProgress(progress, eta, line)
         }
 
+        DownloadLogger.i("YoutubeDL", "Download process ended with exit code ${response.exitCode}")
         Log.d("YoutubeDLRepo", "Download completed with exit code ${response.exitCode}")
 
         val allFiles = targetDir.listFiles() ?: emptyArray()
@@ -492,7 +583,11 @@ class YoutubeDLRepository(private val context: Context) {
                 "ogg" -> "audio/ogg"
                 else -> if (type == MediaType.VIDEO_MP4) "video/mp4" else "audio/mpeg"
             }
-            val pubDir = publicDownloadsDir
+            val relativePath = when (downloadDirType) {
+                DIR_TYPE_STREAMRIP -> "${Environment.DIRECTORY_DOWNLOADS}/StreamRip"
+                else -> Environment.DIRECTORY_DOWNLOADS
+            }
+            val pubDir = getTargetDownloadDirectory()
             if (!pubDir.exists()) {
                 pubDir.mkdirs()
             }
@@ -505,7 +600,7 @@ class YoutubeDLRepository(private val context: Context) {
                 val contentValues = ContentValues().apply {
                     put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
                     put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath)
                     put(MediaStore.MediaColumns.IS_PENDING, 1)
                 }
 

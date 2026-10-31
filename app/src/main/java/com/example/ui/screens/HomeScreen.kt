@@ -34,8 +34,10 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material.icons.filled.VpnKey
+import kotlinx.coroutines.launch
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
@@ -111,6 +113,8 @@ import com.example.data.model.DownloadStatus
 import com.example.data.model.MediaMetadata
 import com.example.data.model.MediaType
 import com.example.data.model.SourceProtocol
+import com.example.ui.components.CollapsibleLogsCard
+import com.example.ui.components.FormatSelectionDialog
 import com.example.ui.components.SettingsDialog
 import com.example.ui.components.VideoPreviewDialog
 import com.example.ui.components.YouTubeLoginDialog
@@ -128,6 +132,7 @@ fun HomeScreen(
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
     val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = androidx.compose.runtime.rememberCoroutineScope()
 
     BackHandler(enabled = uiState.activeTab == AppTab.LIBRARY) {
         viewModel.setTab(AppTab.DOWNLOAD)
@@ -147,11 +152,32 @@ fun HomeScreen(
             isUpdatingEngine = uiState.isUpdatingEngine,
             hasActiveCookies = uiState.hasActiveCookies,
             downloadsCount = uiState.downloads.size,
+            selectedDirectoryType = uiState.selectedDirectoryType,
+            tempCacheSizeBytes = uiState.tempCacheSizeBytes,
+            isClearingCache = uiState.isClearingCache,
+            onSelectDirectoryType = viewModel::setDownloadDirectoryType,
+            onClearTempCache = viewModel::clearTempCache,
             onUpdateEngine = viewModel::updateEngine,
             onOpenCookieDialog = viewModel::openCookieDialog,
             onClearCookies = viewModel::clearCookies,
             onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) },
             onDismiss = viewModel::closeSettingsDialog
+        )
+    }
+
+    if (uiState.showFormatDialog && uiState.status is DownloadStatus.Ready) {
+        val readyMeta = (uiState.status as DownloadStatus.Ready).metadata
+        FormatSelectionDialog(
+            metadata = readyMeta,
+            selectedCandidateId = uiState.selectedCandidateId,
+            onSelectCandidate = viewModel::onSelectCandidate,
+            onDownloadSelected = { candidate ->
+                viewModel.downloadCandidate(candidate)
+            },
+            onPreviewCandidate = { candidate ->
+                viewModel.openPreview(candidate)
+            },
+            onDismiss = viewModel::closeFormatDialog
         )
     }
 
@@ -392,7 +418,13 @@ fun HomeScreen(
                                 )
                             },
                             onShareMedia = { file, type -> viewModel.shareMediaFile(context, file, type) },
-                            onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) }
+                            onOpenDownloadsFolder = { viewModel.openDownloadsFolder(context) },
+                            onOpenFormatDialog = viewModel::openFormatDialog,
+                            onShowMessage = { msg ->
+                                coroutineScope.launch {
+                                    snackbarHostState.showSnackbar(msg)
+                                }
+                            }
                         )
                     }
                     AppTab.LIBRARY -> {
@@ -441,7 +473,9 @@ private fun DownloaderContent(
     onOpenCookieDialog: () -> Unit,
     onOpenMedia: (java.io.File, MediaType) -> Unit,
     onShareMedia: (java.io.File, MediaType) -> Unit,
-    onOpenDownloadsFolder: () -> Unit
+    onOpenDownloadsFolder: () -> Unit,
+    onOpenFormatDialog: () -> Unit = {},
+    onShowMessage: (String) -> Unit = {}
 ) {
     val isDownloading = uiState.status is DownloadStatus.Downloading
 
@@ -748,7 +782,8 @@ private fun DownloaderContent(
                         if (active != null) {
                             onPreviewCandidate(active)
                         }
-                    }
+                    },
+                    onOpenFormatDialog = onOpenFormatDialog
                 )
             }
 
@@ -827,6 +862,15 @@ private fun DownloaderContent(
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                 )
             }
+        }
+
+        item {
+            CollapsibleLogsCard(
+                onShowMessage = onShowMessage
+            )
+        }
+
+        item {
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
@@ -915,7 +959,8 @@ private fun MediaPreviewCard(
     metadata: MediaMetadata,
     selectedCandidateId: String? = null,
     onSelectCandidate: (DiscoveredMediaCandidate) -> Unit = {},
-    onPreviewStream: (() -> Unit)? = null
+    onPreviewStream: (() -> Unit)? = null,
+    onOpenFormatDialog: (() -> Unit)? = null
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -1010,16 +1055,38 @@ private fun MediaPreviewCard(
                     )
                 }
 
-                onPreviewStream?.let { previewAction ->
-                    Spacer(modifier = Modifier.height(6.dp))
-                    OutlinedButton(
-                        onClick = previewAction,
-                        shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.testTag("preview_stream_button")
-                    ) {
-                        Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("Preview Video in App", style = MaterialTheme.typography.labelLarge)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 6.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    onPreviewStream?.let { previewAction ->
+                        OutlinedButton(
+                            onClick = previewAction,
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("preview_stream_button")
+                        ) {
+                            Icon(Icons.Default.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Preview", style = MaterialTheme.typography.labelMedium)
+                        }
+                    }
+
+                    onOpenFormatDialog?.let { formatAction ->
+                        Button(
+                            onClick = formatAction,
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier
+                                .weight(1.2f)
+                                .testTag("open_format_dialog_button")
+                        ) {
+                            Icon(Icons.Default.Tune, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("All Formats (${metadata.candidates.size})", style = MaterialTheme.typography.labelMedium)
+                        }
                     }
                 }
             }

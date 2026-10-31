@@ -21,6 +21,7 @@ import com.example.data.model.MediaType
 import com.example.data.model.ResolutionResult
 import com.example.data.model.SourceProtocol
 import com.example.data.resolver.MediaSourceResolver
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -59,6 +60,10 @@ data class MainUiState(
     val hasActiveCookies: Boolean = false,
     val showCookieDialog: Boolean = false,
     val showSettingsDialog: Boolean = false,
+    val showFormatDialog: Boolean = false,
+    val selectedDirectoryType: String = YoutubeDLRepository.DIR_TYPE_STREAMRIP,
+    val tempCacheSizeBytes: Long = 0L,
+    val isClearingCache: Boolean = false,
     val requiresVerification: Boolean = false,
     val previewState: VideoPreviewState = VideoPreviewState()
 ) {
@@ -86,12 +91,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _uiState = MutableStateFlow(
         MainUiState(
             hasActiveCookies = repository.cookieRepo.hasCookies(),
-            engineVersion = repository.getEngineVersion()
+            engineVersion = repository.getEngineVersion(),
+            selectedDirectoryType = repository.downloadDirType
         )
     )
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
     init {
+        refreshCacheSize()
         viewModelScope.launch {
             app.initState.collect { initState ->
                 when (initState) {
@@ -131,11 +138,57 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun openSettingsDialog() {
+        refreshCacheSize()
         _uiState.update { it.copy(showSettingsDialog = true) }
     }
 
     fun closeSettingsDialog() {
         _uiState.update { it.copy(showSettingsDialog = false) }
+    }
+
+    fun openFormatDialog() {
+        _uiState.update { it.copy(showFormatDialog = true) }
+    }
+
+    fun closeFormatDialog() {
+        _uiState.update { it.copy(showFormatDialog = false) }
+    }
+
+    fun setDownloadDirectoryType(type: String) {
+        repository.downloadDirType = type
+        _uiState.update {
+            it.copy(
+                selectedDirectoryType = type,
+                userMessage = "Download destination: ${repository.getDownloadDirectoryName()}"
+            )
+        }
+    }
+
+    fun clearTempCache() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _uiState.update { it.copy(isClearingCache = true) }
+            val freedBytes = repository.clearCachedTempFiles()
+            val freedMb = freedBytes / (1024.0 * 1024.0)
+            val msg = if (freedMb >= 1.0) {
+                String.format("Freed %.1f MB of temporary cache", freedMb)
+            } else {
+                "${freedBytes / 1024} KB of temporary cache cleared"
+            }
+            _uiState.update {
+                it.copy(
+                    isClearingCache = false,
+                    tempCacheSizeBytes = repository.getTempCacheSizeBytes(),
+                    userMessage = msg
+                )
+            }
+        }
+    }
+
+    fun refreshCacheSize() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val size = repository.getTempCacheSizeBytes()
+            _uiState.update { it.copy(tempCacheSizeBytes = size) }
+        }
     }
 
     fun openCookieDialog() {
@@ -319,7 +372,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         it.copy(
                             status = DownloadStatus.Ready(result.metadata.copy(selectedCandidateId = selectedId)),
                             selectedCandidateId = selectedId,
-                            requiresVerification = false
+                            requiresVerification = false,
+                            showFormatDialog = true
                         )
                     }
                 }

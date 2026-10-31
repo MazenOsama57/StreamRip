@@ -1,0 +1,540 @@
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:43.824 10962 W/.streamrip.vxqk: Accessing hidden method Landroid/media/AudioTrack;->getLatency()I (unsupported, reflection, allowed) 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:44.235 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:44.265 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:44.265 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:44.273 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798.
+query -- param skipped: index = 2684356609. 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:44.612 10962 W/.streamrip.vxqk: Suspending all threads took: 15.318ms 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:50.043 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@c835c87 
+12:22:54.759
+Android
+Warning
+ 10-31 10:22:50.194 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.518 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.635 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.635 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.656 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.657 10962 W/Codec2Client: query -- param skipped: index = 2684356609. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.776 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:00.780 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.472 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@2f7d75a 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.532 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225093 , diff 1 : slot 3 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.617 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.644 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.661 10962 W/MessageQueue: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+java.lang.IllegalStateException: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+at android.os.MessageQueue.enqueueMessage(MessageQueue.java:600)
+at android.os.Handler.enqueueMessage(Handler.java:787)
+at android.os.Handler.sendMessageAtTime(Handler.java:736)
+at android.os.Handler.sendMessageDelayed(Handler.java:706)
+at android.os.Handler.sendMessage(Handler.java:644)
+at android.media.MediaCodec.postEventFromNative(MediaCodec.java:5706) 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.662 10962 W/MessageQueue: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+java.lang.IllegalStateException: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+at android.os.MessageQueue.enqueueMessage(MessageQueue.java:600)
+at android.os.Handler.enqueueMessage(Handler.java:787)
+at android.os.Handler.sendMessageAtTime(Handler.java:736)
+at android.os.Handler.sendMessageDelayed(Handler.java:706)
+at android.os.Handler.sendMessage(Handler.java:644)
+at android.media.MediaCodec.postEventFromNative(MediaCodec.java:5706)
+Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+java.lang.IllegalStateException: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+at android.os.MessageQueue.enqueueMessage(MessageQueue.java:600)
+at android.os.Handler.enqueueMessage(Handler.java:787)
+at android.os.Handler.sendMessageAtTime(Handler.java:736)
+at android.os.Handler.sendMessageDelayed(Handler.java:706)
+at android.os.Handler.sendMessage(Handler.java:644)
+at android.media.MediaCodec.postEventFromNative(MediaCodec.java:5706) 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:05.663 10962 W/MessageQueue: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+java.lang.IllegalStateException: Handler (android.media.MediaCodec$EventHandler) {e7aef4e} sending message to a Handler on a dead thread
+at android.os.MessageQueue.enqueueMessage(MessageQueue.java:600)
+at android.os.Handler.enqueueMessage(Handler.java:787)
+at android.os.Handler.sendMessageAtTime(Handler.java:736)
+at android.os.Handler.sendMessageDelayed(Handler.java:706)
+at android.os.Handler.sendMessage(Handler.java:644)
+at android.media.MediaCodec.postEventFromNative(MediaCodec.java:5706) 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:07.636 11266 W/libpython.so: type=1400 audit(0.0:1202): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590917 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1203): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:07.672 11266 W/libpython.so: type=1400 audit(0.0:1204): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:07.680 11266 W/audit   : audit_lost=1067 audit_rate_limit=5 audit_backlog_limit=64 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:08.648 11266 W/libpython.so: type=1400 audit(0.0:1251): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_asyncio.cpython-312.so" dev="dm-44" ino=590591 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:09.756 11273 W/file    : type=1400 audit(0.0:1253): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1254): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:09.776 11274 W/uname   : type=1400 audit(0.0:1255): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1256): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:23:14.780
+Android
+Warning
+ 10-31 10:23:11.220 11266 W/libpython.so: type=1400 audit(0.0:1257): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_queue.cpython-312.so" dev="dm-44" ino=590618 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:24:34.779
+Android
+Warning
+ 10-31 10:24:18.572 11582 W/libffprobe.so: type=1400 audit(0.0:1258): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libidn2.so" dev="dm-44" ino=591317 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1259): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libvorbis.so" dev="dm-44" ino=591231 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1260): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libavcodec.so.61.19.101" dev="dm-44" ino=591176 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1261): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libsoxr.so" dev="dm-44" ino=591280 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:24:34.779
+Android
+Warning
+ 10-31 10:24:18.587 11582 W/audit   : audit_lost=1113 audit_rate_limit=5 audit_backlog_limit=64 
+12:24:34.779
+Android
+Warning
+ 10-31 10:24:18.572 11582 W/libffprobe.so: type=1400 audit(0.0:1262): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libSvtAv1Enc.so" dev="dm-44" ino=591335 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:24:34.779
+Android
+Warning
+ 10-31 10:24:18.572 11582 W/libffprobe.so: type=1400 audit(0.0:1263): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libwebpmux.so" dev="dm-44" ino=591332 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1264): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libtheoradec.so" dev="dm-44" ino=591166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1265): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libzimg.so" dev="dm-44" ino=591229 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:28.856 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:28.905 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:28.905 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:28.910 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:28.911 10962 W/Codec2Client: query -- param skipped: index = 2684356609. 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:28.953 10962 W/MediaCodecRenderer: Format exceeds selected codec's capabilities [id=2, mimeType=video/avc, codecs=avc1.640028, res=1920x1080, color=NA/NA/NA/8/8, fps=60.0, c2.goldfish.h264.decoder] 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:29.008 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:29.008 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:24:34.780
+Android
+Warning
+ 10-31 10:24:29.038 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:34.214 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:34.224 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:39.639 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@e608d6e 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:39.761 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225095 , diff 1 : slot 15 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:39.808 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225095 , diff 1 : slot 9 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:39.990 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:39.994 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.863 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.889 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.889 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.893 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798.
+query -- param skipped: index = 2684356609. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.953 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.958 10962 W/Codec2Client: query -- param skipped: index = 1342179345. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.959 10962 W/Codec2Client: query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:45.985 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225097 , diff 1 : slot 0 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:46.021 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225097 , diff 1 : slot 3 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:46.039 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225097 , diff 1 : slot 4 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:46.363 10962 W/Codec2-OutputBufferQueue: outputBuffer -- buffers from old generation to 11225097 , diff: 1 , slot: 0 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:46.412 10962 W/Codec2-OutputBufferQueue: outputBuffer -- buffers from old generation to 11225097 , diff: 1 , slot: 3 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:46.452 10962 W/Codec2-OutputBufferQueue: outputBuffer -- buffers from old generation to 11225097 , diff: 1 , slot: 4 
+12:24:54.763
+Android
+Warning
+ 10-31 10:24:50.385 10962 W/.streamrip.vxqk: Suspending all threads took: 9.301ms 
+12:25:14.801
+Android
+Warning
+ 10-31 10:25:00.371 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@e4117ab 
+12:25:14.801
+Android
+Warning
+ 10-31 10:25:00.379 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225098 , diff 1 : slot 12 
+12:25:14.801
+Android
+Warning
+ 10-31 10:25:00.516 10962 W/Codec2Client: query -- param skipped: index = 1342179345. 
+12:25:14.801
+Android
+Warning
+ 10-31 10:25:00.517 10962 W/Codec2Client: query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:25:14.801
+Android
+Warning
+ 10-31 10:25:00.536 10962 W/Codec2Client: query -- param skipped: index = 1342179345. 
+12:25:14.801
+Android
+Warning
+ 10-31 10:25:00.537 10962 W/Codec2Client: query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:02.948 11704 W/libpython.so: type=1400 audit(0.0:1650): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1651): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libpython3.12.so.1.0" dev="dm-44" ino=590917 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:02.980 11704 W/libpython.so: type=1400 audit(0.0:1652): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/zlib.cpython-312.so" dev="dm-44" ino=590632 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:02.990 11704 W/audit   : audit_lost=1495 audit_rate_limit=5 audit_backlog_limit=64 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:05.064 11711 W/file    : type=1400 audit(0.0:1701): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1702): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:05.068 11712 W/uname   : type=1400 audit(0.0:1703): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libcrypto.so.3" dev="dm-44" ino=590923 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:05.072 11712 W/uname   : type=1400 audit(0.0:1704): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libz.so.1.3.1" dev="dm-44" ino=590171 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:25:14.802
+Android
+Warning
+ 10-31 10:25:06.188 11704 W/libpython.so: type=1400 audit(0.0:1705): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/python3.12/lib-dynload/_queue.cpython-312.so" dev="dm-44" ino=590618 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:25:34.760
+Android
+Warning
+ 10-31 10:25:24.015 10962 W/.streamrip.vxqk: Suspending all threads took: 5.047ms 
+12:25:34.760
+Android
+Warning
+ 10-31 10:25:26.980 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@e9a24be 
+12:26:55.648
+Android
+Warning
+ 10-31 10:26:50.272 12827 W/libffmpeg.so: type=1400 audit(0.0:1707): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libnettle.so.8.11" dev="dm-44" ino=591173 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1708): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libgraphite2.so" dev="dm-44" ino=591289 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1709): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-support.so" dev="dm-44" ino=590166 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1710): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libgmp.so" dev="dm-44" ino=591257 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1711): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libopenmpt.so" dev="dm-44" ino=591234 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1712): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libharfbuzz.so" dev="dm-44" ino=591303 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1713): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/python/usr/lib/libandroid-posix-semaphore.so" dev="dm-44" ino=590170 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk
+type=1400 audit(0.0:1714): avc:  granted  { execute } for  path="/data/data/com.aistudio.streamrip.vxqk/no_backup/youtubedl-android/packages/ffmpeg/usr/lib/libsamplerate.so" dev="dm-44" ino=591310 scontext=u:r:untrusted_app:s0:c215,c256,c512,c768 tcontext=u:object_r:app_data_file:s0:c215,c256,c512,c768 tclass=file app=com.aistudio.streamrip.vxqk 
+12:26:55.648
+Android
+Warning
+ 10-31 10:26:50.280 12827 W/audit   : audit_lost=1542 audit_rate_limit=5 audit_backlog_limit=64 
+12:27:34.773
+Android
+Warning
+ 10-31 10:27:25.045 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:27:34.773
+Android
+Warning
+ 10-31 10:27:25.063 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:27:34.773
+Android
+Warning
+ 10-31 10:27:25.063 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:27:34.773
+Android
+Warning
+ 10-31 10:27:25.072 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:27:34.773
+Android
+Warning
+ 10-31 10:27:25.073 10962 W/Codec2Client: query -- param skipped: index = 2684356609. 
+12:27:34.773
+Android
+Warning
+ 10-31 10:27:25.195 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:27:34.774
+Android
+Warning
+ 10-31 10:27:25.205 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:27:34.774
+Android
+Warning
+ 10-31 10:27:25.208 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:37.391 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@e51fe64 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:37.419 10962 W/Codec2Client: query -- param skipped: index = 1342179345. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:37.423 10962 W/Codec2Client: query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:37.431 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:43.079 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:43.123 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:43.123 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:43.135 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:43.146 10962 W/Codec2Client: query -- param skipped: index = 2684356609. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:43.229 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225103 , diff 1 : slot 1 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:48.038 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@6a0cd7c 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:48.076 10962 W/Codec2-OutputBufferQueue: receiving stale buffer: generation 11225104 , diff 1 : slot 11 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:48.121 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170. 
+12:27:54.742
+Android
+Warning
+ 10-31 10:27:48.130 10962 W/Codec2Client: query -- param skipped: index = 1610614798. 
+12:28:14.797
+Android
+Warning
+ 10-31 10:28:01.999 10962 W/ColorUtils: expected specified color aspects (2:0:0:0) 
+12:28:14.797
+Android
+Warning
+ 10-31 10:28:02.015 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:28:14.797
+Android
+Warning
+ 10-31 10:28:02.015 10962 W/CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range. 
+12:28:14.797
+Android
+Warning
+ 10-31 10:28:02.035 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798.
+query -- param skipped: index = 2684356609. 
+12:28:14.797
+Android
+Warning
+ 10-31 10:28:02.116 10962 W/Codec2Client: query -- param skipped: index = 1107298332. 
+12:28:14.797
+Android
+Warning
+ 10-31 10:28:02.118 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:28:14.798
+Android
+Warning
+ 10-31 10:28:09.225 10962 W/WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=androidx.activity.OnBackPressedDispatcher$Api34Impl$createOnBackAnimationCallback$1@ab5519c 
+12:28:14.798
+Android
+Warning
+ 10-31 10:28:09.422 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
+12:28:14.798
+Android
+Warning
+ 10-31 10:28:09.482 10962 W/Codec2Client: query -- param skipped: index = 1342179345.
+query -- param skipped: index = 2415921170.
+query -- param skipped: index = 1610614798. 
